@@ -1,16 +1,15 @@
 package SHARYANTO::Proc::Daemon;
 BEGIN {
-  $SHARYANTO::Proc::Daemon::VERSION = '0.01';
+  $SHARYANTO::Proc::Daemon::VERSION = '0.02';
 }
 # ABSTRACT: Create preforking, autoreloading daemon
 
-
-# routines for a preforking, autoreloading daemon
 
 use 5.010;
 use strict;
 use warnings;
 
+use Fcntl qw(:DEFAULT :flock);
 use FindBin;
 use IO::Select;
 use POSIX;
@@ -32,6 +31,7 @@ sub new {
     $args{run_as_root}            //= 1;
     $args{daemonize}              //= 1;
     $args{prefork}                //= 3;
+    $args{max_children}           //= 150;
 
     die "BUG: Please specify main_loop routine"
         unless $args{main_loop};
@@ -140,9 +140,9 @@ sub parent_sig_handlers {
     die "BUG: Setting parent_sig_handlers must be done in parent"
         if $self->{parent_pid} ne $$;
 
-    $SIG{INT}  = sub { $self->shutdown("INT")  };
-    $SIG{TERM} = sub { $self->shutdown("TERM") };
-    #$SIG{HUP} = \&reload_server;
+    $SIG{INT}  = \&INT_HANDLER;
+    $SIG{TERM} = \&TERM_HANDLER;
+    #$SIG{HUP} = \&RELOAD_HANDLER;
 
     $SIG{CHLD} = \&REAPER;
 }
@@ -163,6 +163,7 @@ sub init {
     my ($self) = @_;
 
     $self->{pid_path} or die "BUG: Please specify pid_path";
+    #$self->{scoreboard_path} or die "BUG: Please specify scoreboard_path";
     $self->{run_as_root} //= 1;
     if ($self->{run_as_root}) {
         $> and die "Permission denied, daemon must be run as root\n";
@@ -172,12 +173,178 @@ sub init {
     warn "Daemon (PID $$) started at ", scalar(localtime), "\n";
 }
 
+# XXX use shared memory scoreboard for better performance
+my $SC_RECSIZE = 20;
+
+# the scoreboard file contains fixed-size records, $SC_RECSIZE bytes each. each
+# record is used by a child process to store its data, and when the child
+# process is dead, its record will be reused by another child process.
+#
+# each record contains the following data:
+#
+# - pid of child process (4 bytes), 0 means the record is empty and can be used
+#   for a new child process
+#
+# - child start time (4 bytes)
+#
+# - number of requests that the child has processed (2 bytes)
+#
+# - current request's start time (4 bytes)
+#
+# - last update time (4 byte)
+#
+# - current state of child process (1 byte, ASCII character): "_" means idle,
+#   "R" is reading request, "W" is writing reply
+#
+# - reserved (1 byte)
+#
+# total 20 bytes per record.
+#
+# when a new daemon is started, the parent process truncates the scoreboard to 0
+# bytes. the scoreboard then will grow as new child processes are started. each
+# child process will find an empty record on the scoreboard and then only write
+# to that record for the rest of its lifetime. the parent usually only reads the
+# scoreboard file, but when a child process is dead/reaped it will clean the
+# scoreboard record of dead processes. the only time a scoreboard file needs to
+# be locked is when the new child process tries to occupy a new record (so that
+# two child processes do not get into race condition). at other times, a lock is
+# not needed.
+
+sub init_scoreboard {
+    my ($self) = @_;
+    return unless $self->{scoreboard_path};
+
+    sysopen($self->{_scoreboard_fh}, $self->{scoreboard_path},
+            O_RDWR | O_CREAT | O_TRUNC)
+        or die "Can't initialize scoreboard path: $!";
+    # for safety against full disk, pre-allocate some empty records
+    syswrite $self->{_scoreboard_fh},
+        "\x00" x ($SC_RECSIZE*($self->{max_children}+1));
+}
+
+# used by child process to update its state in the scoreboard file.
+sub update_scoreboard {
+    my ($self, $data) = @_;
+    return unless $self->{_scoreboard_fh};
+
+    # XXX schema
+    die "BUG: data must be hashref" unless ref($data) eq 'HASH';
+    for (keys %$data) {
+        die "BUG: Unknown key in data: $_" unless
+            /\A(?:child_start_time|num_reqs|req_start_time|
+                 state)\z/x;
+    }
+
+    # if we haven't picked an empty record yet, pick now
+    if (!defined($self->{_scoreboard_recno})) {
+        flock $self->{_scoreboard_fh}, 2;
+        sysseek $self->{_scoreboard_fh}, 0, 0;
+        my $rec;
+        $self->{_scoreboard_recno} = 0;
+        my $pid;
+        while (sysread($self->{_scoreboard_fh}, $rec, $SC_RECSIZE)) {
+            die "Abnormal scoreboard file size (not multiples of $SC_RECSIZE)"
+                if length($rec) && length($rec) < $SC_RECSIZE; # safety
+            $pid = unpack("N", $rec);
+            last if !$pid; # empty record
+            $self->{_scoreboard_recno}++;
+        }
+        # we need to make a new record
+        $self->{_scoreboard_recno}++ if !defined($pid) || $pid;
+        sysseek $self->{_scoreboard_fh},
+            $self->{_scoreboard_recno}*$SC_RECSIZE, 0;
+        syswrite $self->{_scoreboard_fh},
+            pack("NNSNNCC", $$, 0,0,0,0,ord("_"),0);
+        flock $self->{_scoreboard_fh}, 8;
+    }
+    sysseek $self->{_scoreboard_fh},
+        $self->{_scoreboard_recno}*$SC_RECSIZE, 0; # needn't write pid again
+    my $rec;
+    sysread $self->{_scoreboard_fh}, $rec, $SC_RECSIZE;
+    my ($pid, $child_start_time, $num_reqs, $req_start_time,
+        $mtime, $state) = unpack("NNSNNC", $rec);
+    $state = chr($state);
+    sysseek $self->{_scoreboard_fh},
+        $self->{_scoreboard_recno}*$SC_RECSIZE, 0;
+    syswrite $self->{_scoreboard_fh},
+        pack("NNSNNCC",
+             $pid,
+             $data->{child_start_time} // $child_start_time // 0,
+             $data->{num_reqs} // $num_reqs // 0,
+             $data->{req_start_time} // $req_start_time // 0,
+             time(),
+             ord($data->{state} // $state // "_"),
+             0);
+}
+
+# clean records from process(es) that no longer exist. called by parent after
+# being notified that a child is dead. once in a while, clean not only $pid but
+# also check all records of dead processes.
+sub clean_scoreboard {
+    my ($self, $child_pid) = @_;
+    return unless $self->{_scoreboard_fh};
+
+    #warn "Cleaning scoreboard (pid $child_pid)\n";
+    my $check_all = rand()*50 >= 49;
+
+    my $rec;
+    flock $self->{_scoreboard_fh}, 2;
+    sysseek $self->{_scoreboard_fh}, 0, 0;
+    my $i = -1;
+    while (sysread($self->{_scoreboard_fh}, $rec, $SC_RECSIZE)) {
+        $i++;
+        die "Abnormal scoreboard file size (not multiples of $SC_RECSIZE)"
+            if length($rec) && length($rec) < $SC_RECSIZE; # safety
+        my ($pid) = unpack("N", $rec);
+        next if !$check_all && $pid != $child_pid;
+        next if $check_all && kill(0, $pid);
+        sysseek $self->{_scoreboard_fh}, $i*$SC_RECSIZE, 0;
+        syswrite $self->{_scoreboard_fh},
+            pack("NNSNNCC", 0, 0,0,0,0,ord("_"),0);
+        last unless $check_all;
+    }
+    flock $self->{_scoreboard_fh}, 8;
+}
+
+sub read_scoreboard {
+    my ($self) = @_;
+    return unless $self->{_scoreboard_fh};
+
+    my $rec;
+    my $res = {children=>{}, num_children=>0, num_busy=>0, num_idle=>0};
+    sysseek $self->{_scoreboard_fh}, 0, 0;
+    while (sysread($self->{_scoreboard_fh}, $rec, $SC_RECSIZE)) {
+        die "Abnormal scoreboard file size (not multiples of $SC_RECSIZE)"
+            if length($rec) && length($rec) < $SC_RECSIZE; # safety
+        my ($pid, $child_start_time, $num_reqs, $req_start_time,
+            $mtime, $state) = unpack("NNSNNC", $rec);
+        $state = chr($state);
+        next unless $pid;
+        $res->{num_children}++;
+        if ($state =~ /^[_.]$/) {
+            $res->{num_idle}++;
+        } else {
+            $res->{num_busy}++;
+        }
+        $res->{children}{$pid} = {
+            pid=>$pid,
+            child_start_time=>$child_start_time,
+            num_reqs=>$num_reqs,
+            req_start_time=>$req_start_time,
+            mtime=>$mtime,
+            state=>$state,
+        };
+    }
+    $res;
+}
+
 sub run {
     my ($self) = @_;
 
     $self->init;
     $self->set_label('parent');
     $self->{after_init}->() if $self->{after_init};
+    $self->init_scoreboard;
 
     if ($self->{prefork}) {
         # prefork children
@@ -188,6 +355,9 @@ sub run {
 
         # and maintain the population
         my $i = 0;
+        my $j = 0; # number of increments of child when busy
+        my $k = 0; # number of decrements of child when idle
+        my $max_children_warned;
         while (1) {
             #sleep; # wait for a signal (i.e., child's death)
             sleep 1;
@@ -196,9 +366,68 @@ sub run {
                 $self->check_reload_self;
                 $i = 0;
             }
-            for (my $i = keys(%{$self->{children}});
-                 $i < $self->{prefork}; $i++) {
-                $self->make_new_child(); # top up the child pool
+            # top up child pool until at least 'prefork'
+            if (keys(%{$self->{children}}) < $self->{prefork}) {
+                warn "Topping up child pool to $self->{prefork}\n";
+                for (my $i = keys(%{$self->{children}});
+                     $i < $self->{prefork}; $i++) {
+                    $self->make_new_child(); # top up the child pool
+                }
+            }
+            # if busy, autoadjust child pool until at least 'max_children', and
+            # decrease it again when idle
+            if (rand()*4 >= 3) {
+                my $res = $self->read_scoreboard;
+                if ($res) {
+                    if ($res->{num_busy} && $res->{num_idle} <= 1) {
+                        warn "max_children ($self->{max_children} reached, ".
+                            "consider increasing it)\n" if
+                                $res->{num_children} >= $self->{max_children}
+                                    && !$max_children_warned++;
+                        $j++;
+                        warn "Autoadjust: increase number of children ".
+                            "($j*2, $res->{num_children} -> .)\n";
+                        for (1..$j*2) {
+                            last if
+                                $res->{num_children} >= $self->{max_children};
+                            $self->make_new_child();
+                            $res->{num_chilren}++;
+                        }
+                    } else {
+                        $j = 0;
+                    }
+
+                    # disable temporarily, not yet working properly
+                    if (0 && $res->{num_idle} >= 3 &&
+                            $res->{num_children} > $self->{prefork}) {
+                        $k++;
+                        warn "Autoadjust: decrease number of children ".
+                            "($k*2, $res->{num_children} -> .)\n";
+                        # sort by oldest idle
+                        my @pids = sort { $res->{children}{$a}{mtime} <=>
+                                              $res->{children}{$b}{mtime} }
+                            grep {$res->{children}{$_}{state} eq '_'}
+                                keys %{$res->{children}};
+                        for (1..$k*2) {
+                            last if
+                                $res->{num_children} <= $self->{prefork};
+                            if (@pids) {
+                                # pick oldest idle child and kill it
+                                my $pid = shift @pids;
+                                if ($pid) {
+                                    kill TERM => $pid;
+                                    $res->{num_chilren}--;
+                                    delete $res->{children}{$pid};
+                                    delete $self->{children}{$pid};
+                                    warn "Killed process $pid ".
+                                        "(num_children=$res->{num_children})\n";
+                                }
+                            }
+                        }
+                    } else {
+                        $k = 0;
+                    }
+                }
             }
         }
     } else {
@@ -209,29 +438,32 @@ sub run {
 sub make_new_child {
     my ($self) = @_;
 
-    # i don't understand this, ignoring
-    ## block signal for fork
-    #my $sigset = POSIX::SigSet->new(SIGINT);
-    #sigprocmask(SIG_BLOCK, $sigset)
-    #    or die "Can't block SIGINT for fork: $!\n";
+    # from perl cookbook: block signal for fork
+    my $sigset = POSIX::SigSet->new(SIGINT);
+    sigprocmask(SIG_BLOCK, $sigset)
+        or die "Can't block SIGINT for fork: $!\n";
 
     my $pid;
-    die "fork: $!" unless defined ($pid = fork);
+    unless (defined ($pid = fork)) {
+        warn "Can't fork: $!";
+        sigprocmask(SIG_UNBLOCK, $sigset)
+            or die "Can't unblock SIGINT for fork: $!\n";
+        return;
+    }
 
     if ($pid) {
-        # i don't understand this, ignoring
-        ## Parent records the child's birth and returns.
-        #sigprocmask(SIG_UNBLOCK, $sigset)
-        #    or die "Can't unblock SIGINT for fork: $!\n";
+        # from perl cookbook: Parent records the child's birth and returns.
+        sigprocmask(SIG_UNBLOCK, $sigset)
+            or die "Can't unblock SIGINT for fork: $!\n";
+
         $self->{children}{$pid} = 1;
         return;
     } else {
-        # i don't understand this, ignoring
-        ## Child can *not* return from this subroutine.
-        #$SIG{INT} = 'DEFAULT';      # make SIGINT kill us as it did before
-        ## unblock signals
-        #sigprocmask(SIG_UNBLOCK, $sigset)
-        #    or die "Can't unblock SIGINT for fork: $!\n";
+        # from perl cookbook: Child can *not* return from this subroutine.
+        $SIG{INT} = 'DEFAULT';      # make SIGINT kill us as it did before
+        sigprocmask(SIG_UNBLOCK, $sigset)
+            or die "Can't unblock SIGINT for fork: $!\n";
+
         $self->child_sig_handlers;
         $self->set_label('child');
         $self->{main_loop}->();
@@ -258,8 +490,7 @@ sub is_parent {
 }
 
 sub shutdown {
-    my ($self, $reason, $exitcode) = @_;
-    $exitcode //= 1;
+    my ($self, $reason) = @_;
 
     warn "Shutting down daemon".($reason ? " (reason=$reason)" : "")."\n";
     $self->{before_shutdown}->() if $self->{before_shutdown};
@@ -269,8 +500,6 @@ sub shutdown {
         $self->unlink_pidfile;
         $self->close_logs;
     }
-
-    exit $exitcode;
 }
 
 sub REAPER {
@@ -278,10 +507,25 @@ sub REAPER {
     my $pid = wait;
     for (@daemons) {
         delete $_->{children}{$pid};
+        $_->clean_scoreboard($pid);
     }
 }
 
-#    check_reload_self() if (rand()*150 < 1.0); # +- every 150 secs or reqs
+sub INT_HANDLER {
+    local($SIG{CHLD}) = 'IGNORE'; # from perl cookbook
+    for (@daemons) {
+        $_->shutdown("INT");
+    }
+    exit 1;
+}
+
+sub TERM_HANDLER {
+    local($SIG{CHLD}) = 'IGNORE'; # from perl cookbook
+    for (@daemons) {
+        $_->shutdown("TERM");
+    }
+    exit 1;
+}
 
 sub check_reload_self {
     my ($self) = @_;
@@ -335,7 +579,7 @@ SHARYANTO::Proc::Daemon - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =for Pod::Coverage .
 
@@ -347,19 +591,39 @@ Arguments:
 
 =over 4
 
-=item * run_as_root (default 1)
+=item * run_as_root => BOOL (default 1)
 
 If true, bails out if not running as root.
 
 =item * error_log_path (required if daemonize=1)
 
-=item * access_log_path (required if daemonize=1)
+=item * access_log_path => STR (required if daemonize=1)
 
-=item * pid_path*
+=item * pid_path* => STR
 
-=item * daemonize (default 1)
+=item * scoreboard_path => STR (default none)
 
-=item * prefork (default 3, 0 means a nonforking/single-threaded daemon)
+If not set, no scoreboard file will be created/updated. Scoreboard file is used
+to communicate between parent and child processes. Autoadjustment of number of
+processes, for example, requires this (see max_children for more details).
+
+=item * daemonize => BOOL (default 1)
+
+=item * prefork => INT (default 3, 0 means a nonforking/single-threaded daemon)
+
+This is like the StartServers setting in Apache webserver (the prefork MPM), the
+number of children processes to prefork.
+
+=item * max_children => INT (default 150)
+
+This is like the MaxClients setting in Apache webserver. Initially the number of
+children spawned will follow the 'prefork' setting. If while serving requests,
+all children are busy, parent will automatically increase the number of children
+gradually until 'max_children'. If afterwards these children are idle, they will
+be gradually killed off until there are 'prefork' number of children again.
+
+Note that for this to function, scoreboard_path must be defined since the parent
+needs to communicate with children.
 
 =item * auto_reload_check_every => INT (default undef, meaning never)
 

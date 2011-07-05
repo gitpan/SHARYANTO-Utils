@@ -1,6 +1,6 @@
 package SHARYANTO::HTML::Extract::ImageLinks;
 BEGIN {
-  $SHARYANTO::HTML::Extract::ImageLinks::VERSION = '0.01';
+  $SHARYANTO::HTML::Extract::ImageLinks::VERSION = '0.02';
 }
 # ABSTRACT: Extract image links from HTML document
 
@@ -47,7 +47,6 @@ sub extract_image_links {
             $base = $2;
         }
     }
-    $base //= '';
 
     my %memory;
     my @res;
@@ -72,7 +71,7 @@ sub extract_image_links {
 
 1;
 
-__END__
+
 =pod
 
 =head1 NAME
@@ -81,7 +80,36 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.01
+version 0.02
+
+=head1 FUNCTIONS
+
+None are exported by default, but they are exportable.
+
+=head2 extract_image_links(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
+
+
+Extract image links from HTML document.
+
+Either specify either url, html.
+
+Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
+between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
+message, RESULT is the actual result.
+
+Arguments (C<*> denotes required arguments):
+
+=over 4
+
+=item * B<base> => I<str>
+
+base URL for images.
+
+=item * B<html> => I<str>
+
+HTML document to extract from.
+
+=back
 
 =head1 AUTHOR
 
@@ -95,4 +123,7 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
+
+
+__END__
 

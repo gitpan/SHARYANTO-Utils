@@ -1,6 +1,6 @@
 package SHARYANTO::Text::Prompt;
 BEGIN {
-  $SHARYANTO::Text::Prompt::VERSION = '0.01';
+  $SHARYANTO::Text::Prompt::VERSION = '0.02';
 }
 # ABSTRACT: Prompt user question
 
@@ -67,7 +67,7 @@ SHARYANTO::Text::Prompt - Prompt user question
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 FUNCTIONS
 

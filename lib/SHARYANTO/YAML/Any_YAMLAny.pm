@@ -1,6 +1,6 @@
 package SHARYANTO::YAML::Any;
 BEGIN {
-  $SHARYANTO::YAML::Any::VERSION = '0.01';
+  $SHARYANTO::YAML::Any::VERSION = '0.02';
 }
 # Pick a YAML implementation and use it.
 
@@ -145,7 +145,7 @@ SHARYANTO::YAML::Any
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

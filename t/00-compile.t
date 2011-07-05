@@ -24,18 +24,7 @@ find(
   'lib',
 );
 
-my @scripts;
-if ( -d 'bin' ) {
-    find(
-      sub {
-        return unless -f;
-        my $found = $File::Find::name;
-        # nothing to skip
-        push @scripts, $found;
-      },
-      'bin',
-    );
-}
+my @scripts = glob "bin/*";
 
 my $plan = scalar(@modules) + scalar(@scripts);
 $plan ? (plan tests => $plan) : (plan skip_all => "no tests to run");

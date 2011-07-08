@@ -1,6 +1,6 @@
 package SHARYANTO::Template::Util;
 BEGIN {
-  $SHARYANTO::Template::Util::VERSION = '0.02';
+  $SHARYANTO::Template::Util::VERSION = '0.03';
 }
 # ABSTRACT: Recursively process .tt files
 
@@ -44,7 +44,7 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 AUTHOR
 

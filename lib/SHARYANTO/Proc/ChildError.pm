@@ -1,6 +1,6 @@
 package SHARYANTO::Proc::ChildError;
 BEGIN {
-  $SHARYANTO::Proc::ChildError::VERSION = '0.02';
+  $SHARYANTO::Proc::ChildError::VERSION = '0.03';
 }
 # ABSTRACT: Explain process child error
 
@@ -37,7 +37,7 @@ SHARYANTO::Proc::ChildError - Explain process child error
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 AUTHOR
 

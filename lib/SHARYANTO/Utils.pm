@@ -1,6 +1,6 @@
 package SHARYANTO::Utils;
 BEGIN {
-  $SHARYANTO::Utils::VERSION = '0.02';
+  $SHARYANTO::Utils::VERSION = '0.03';
 }
 # ABSTRACT: SHARYANTO's temporary namespace for various routines
 
@@ -15,7 +15,7 @@ SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 FAQ
 

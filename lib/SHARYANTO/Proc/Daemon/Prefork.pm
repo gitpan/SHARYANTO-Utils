@@ -1,6 +1,6 @@
-package SHARYANTO::Proc::Daemon;
+package SHARYANTO::Proc::Daemon::Prefork;
 BEGIN {
-  $SHARYANTO::Proc::Daemon::VERSION = '0.02';
+  $SHARYANTO::Proc::Daemon::Prefork::VERSION = '0.03';
 }
 # ABSTRACT: Create preforking, autoreloading daemon
 
@@ -368,7 +368,7 @@ sub run {
             }
             # top up child pool until at least 'prefork'
             if (keys(%{$self->{children}}) < $self->{prefork}) {
-                warn "Topping up child pool to $self->{prefork}\n";
+                #warn "Topping up child pool to $self->{prefork}\n";
                 for (my $i = keys(%{$self->{children}});
                      $i < $self->{prefork}; $i++) {
                     $self->make_new_child(); # top up the child pool
@@ -385,8 +385,8 @@ sub run {
                                 $res->{num_children} >= $self->{max_children}
                                     && !$max_children_warned++;
                         $j++;
-                        warn "Autoadjust: increase number of children ".
-                            "($j*2, $res->{num_children} -> .)\n";
+                        #warn "Autoadjust: increase number of children ".
+                        #    "($j*2, $res->{num_children} -> .)\n";
                         for (1..$j*2) {
                             last if
                                 $res->{num_children} >= $self->{max_children};
@@ -401,8 +401,9 @@ sub run {
                     if (0 && $res->{num_idle} >= 3 &&
                             $res->{num_children} > $self->{prefork}) {
                         $k++;
-                        warn "Autoadjust: decrease number of children ".
-                            "($k*2, $res->{num_children} -> .)\n";
+                        #warn "Autoadjust: decrease number of children ".
+                        #    "($k*2, $res->{num_children} -> .)\n";
+
                         # sort by oldest idle
                         my @pids = sort { $res->{children}{$a}{mtime} <=>
                                               $res->{children}{$b}{mtime} }
@@ -419,8 +420,8 @@ sub run {
                                     $res->{num_chilren}--;
                                     delete $res->{children}{$pid};
                                     delete $self->{children}{$pid};
-                                    warn "Killed process $pid ".
-                                        "(num_children=$res->{num_children})\n";
+                                    #warn "Killed process $pid ".
+                                    #   "(num_children=$res->{num_children})\n";
                                 }
                             }
                         }
@@ -575,11 +576,11 @@ __END__
 
 =head1 NAME
 
-SHARYANTO::Proc::Daemon - Create preforking, autoreloading daemon
+SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =for Pod::Coverage .
 

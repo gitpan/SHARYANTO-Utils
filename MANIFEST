@@ -8,7 +8,7 @@ README
 dist.ini
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/Proc/ChildError.pm
-lib/SHARYANTO/Proc/Daemon.pm
+lib/SHARYANTO/Proc/Daemon/Prefork.pm
 lib/SHARYANTO/Template/Util.pm
 lib/SHARYANTO/Text/Prompt.pm
 lib/SHARYANTO/Utils.pm

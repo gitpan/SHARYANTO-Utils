@@ -1,8 +1,7 @@
 package SHARYANTO::HTML::Extract::ImageLinks;
 BEGIN {
-  $SHARYANTO::HTML::Extract::ImageLinks::VERSION = '0.03';
+  $SHARYANTO::HTML::Extract::ImageLinks::VERSION = '0.04';
 }
-# ABSTRACT: Extract image links from HTML document
 
 use 5.010;
 use strict;
@@ -14,6 +13,8 @@ use URI::URL;
 use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
+
+our $VERSION = '0.04'; # VERSION
 
 our %SPEC;
 
@@ -70,6 +71,7 @@ sub extract_image_links {
 }
 
 1;
+# ABSTRACT: Extract image links from HTML document
 
 
 =pod
@@ -80,7 +82,7 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 FUNCTIONS
 

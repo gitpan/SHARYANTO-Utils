@@ -1,8 +1,7 @@
 package SHARYANTO::Text::Prompt;
 BEGIN {
-  $SHARYANTO::Text::Prompt::VERSION = '0.03';
+  $SHARYANTO::Text::Prompt::VERSION = '0.04';
 }
-# ABSTRACT: Prompt user question
 
 use 5.010;
 use strict;
@@ -12,6 +11,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(prompt);
 
+our $VERSION = '0.04'; # VERSION
 
 sub prompt {
     my ($text, $opts) = @_;
@@ -57,6 +57,9 @@ sub prompt {
 }
 
 1;
+# ABSTRACT: Prompt user question
+
+
 
 __END__
 =pod
@@ -67,7 +70,7 @@ SHARYANTO::Text::Prompt - Prompt user question
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 FUNCTIONS
 

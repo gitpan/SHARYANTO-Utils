@@ -1,9 +1,7 @@
 package SHARYANTO::Proc::Daemon::Prefork;
 BEGIN {
-  $SHARYANTO::Proc::Daemon::Prefork::VERSION = '0.03';
+  $SHARYANTO::Proc::Daemon::Prefork::VERSION = '0.04';
 }
-# ABSTRACT: Create preforking, autoreloading daemon
-
 
 use 5.010;
 use strict;
@@ -15,10 +13,11 @@ use IO::Select;
 use POSIX;
 use Symbol;
 
+our $VERSION = '0.04'; # VERSION
+
 # --- globals
 
 my @daemons; # list of all daemons
-
 
 sub new {
     my ($class, %args) = @_;
@@ -28,7 +27,7 @@ sub new {
         $args{name} = $0;
         $args{name} =~ s!.+/!!;
     }
-    $args{run_as_root}            //= 1;
+    $args{require_root}           //= 0;
     $args{daemonize}              //= 1;
     $args{prefork}                //= 3;
     $args{max_children}           //= 150;
@@ -164,8 +163,7 @@ sub init {
 
     $self->{pid_path} or die "BUG: Please specify pid_path";
     #$self->{scoreboard_path} or die "BUG: Please specify scoreboard_path";
-    $self->{run_as_root} //= 1;
-    if ($self->{run_as_root}) {
+    if ($self->{require_root}) {
         $> and die "Permission denied, daemon must be run as root\n";
     }
 
@@ -570,6 +568,9 @@ sub check_reload_self {
 }
 
 1;
+# ABSTRACT: Create preforking, autoreloading daemon
+
+
 
 __END__
 =pod
@@ -580,7 +581,7 @@ SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =for Pod::Coverage .
 
@@ -592,7 +593,7 @@ Arguments:
 
 =over 4
 
-=item * run_as_root => BOOL (default 1)
+=item * require_root => BOOL (default 0)
 
 If true, bails out if not running as root.
 

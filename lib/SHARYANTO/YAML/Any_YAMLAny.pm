@@ -1,8 +1,7 @@
 package SHARYANTO::YAML::Any;
 BEGIN {
-  $SHARYANTO::YAML::Any::VERSION = '0.03';
+  $SHARYANTO::YAML::Any::VERSION = '0.04';
 }
-# Pick a YAML implementation and use it.
 
 # NOTE: temporary namespace, will eventually be refactored, tidied up, and sent
 # to a more proper namespace.
@@ -135,8 +134,6 @@ sub croak {
 1;
 
 
-
-
 =pod
 
 =head1 NAME
@@ -145,7 +142,7 @@ SHARYANTO::YAML::Any
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -165,7 +162,7 @@ This module selects the best one available and uses it.
 
 =head1 NAME
 
-SHARYANTO::YAML::Any - SHARYANTO::YAML::Any - Pick a YAML implementation and use it.
+SHARYANTO::YAML::Any - Pick a YAML implementation and use it.
 
 =head1 VERSION
 
@@ -265,4 +262,5 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+
 

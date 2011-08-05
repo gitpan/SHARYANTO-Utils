@@ -1,6 +1,6 @@
 package SHARYANTO::Proc::ChildError;
 BEGIN {
-  $SHARYANTO::Proc::ChildError::VERSION = '0.04';
+  $SHARYANTO::Proc::ChildError::VERSION = '0.05';
 }
 
 use 5.010;
@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(explain_child_error);
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 sub explain_child_error {
     my $e = shift // $?;
@@ -38,7 +38,7 @@ SHARYANTO::Proc::ChildError - Explain process child error
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 FUNCTIONS
 

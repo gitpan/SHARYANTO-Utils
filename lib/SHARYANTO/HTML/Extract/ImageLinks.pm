@@ -11,7 +11,7 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 
 our %SPEC;
 
@@ -79,7 +79,7 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 FUNCTIONS
 
@@ -102,7 +102,11 @@ Arguments (C<*> denotes required arguments):
 
 =item * B<base> => I<str>
 
+base URL for images.
+
 =item * B<html> => I<str>
+
+HTML document to extract from.
 
 =back
 

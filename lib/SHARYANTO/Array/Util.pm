@@ -5,7 +5,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 
 our %SPEC;
 
@@ -17,7 +17,7 @@ $SPEC{match_array_or_regex} = {
             arg_pos => 0,
         }],
         haystack => ["any*" => {
-            of => ["str*[]*", "str*"], # XXX "str*" should be "regex*"
+            of => [["array*"=>{of=>"str*"}], "str*"], # XXX 2nd should be regex*
             arg_pos => 1,
         }],
     },
@@ -50,7 +50,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
@@ -60,7 +60,7 @@ version 0.07
 
 None are exported by default, but they are exportable.
 
-=head2 match_regex_or_array(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
+=head2 match_regex_or_array(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
 
 
 Check whether an item matches array of values or regex.
@@ -73,13 +73,17 @@ Arguments (C<*> denotes required arguments):
 
 =over 4
 
-=item * B<haystack> => I<>
+=item * B<needle>* => I<str>
 
-=item * B<needle> => I<str>
+1st argument ($args[0]).
+
+=item * B<haystack>* => I<array|str>
+
+2nd argument ($args[1]).
 
 =back
 
-=head2 match_regex_or_array(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
+=head2 match_regex_or_array(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
 
 
 Check whether an item matches array of values or regex.
@@ -92,9 +96,13 @@ Arguments (C<*> denotes required arguments):
 
 =over 4
 
-=item * B<haystack> => I<>
+=item * B<needle>* => I<str>
 
-=item * B<needle> => I<str>
+1st argument ($args[0]).
+
+=item * B<haystack>* => I<array|str>
+
+2nd argument ($args[1]).
 
 =back
 

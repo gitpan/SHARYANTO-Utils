@@ -1,7 +1,4 @@
 package SHARYANTO::YAML::Any;
-BEGIN {
-  $SHARYANTO::YAML::Any::VERSION = '0.05';
-}
 
 # NOTE: temporary namespace, will eventually be refactored, tidied up, and sent
 # to a more proper namespace.
@@ -142,7 +139,7 @@ SHARYANTO::YAML::Any
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

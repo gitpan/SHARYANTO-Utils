@@ -6,6 +6,7 @@ MANIFEST.SKIP
 META.yml
 README
 dist.ini
+lib/SHARYANTO/Array/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/Proc/ChildError.pm
 lib/SHARYANTO/Proc/Daemon/Prefork.pm
@@ -16,6 +17,7 @@ lib/SHARYANTO/YAML/Any.pm
 lib/SHARYANTO/YAML/Any_SyckOnly.pm
 lib/SHARYANTO/YAML/Any_YAMLAny.pm
 t/00-compile.t
+t/array_util.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 weaver.ini

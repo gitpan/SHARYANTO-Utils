@@ -14,8 +14,11 @@ meta-spec:
   version: 1.4
 name: SHARYANTO-Utils
 requires:
+  Data::Clone: 0
   File::Slurp: 0
+  File::Which: 0
   HTML::Parser: 0
+  Parse::Netstat: 0
   Template::Tiny: 0
   Test::More: 0.96
   URI: 0
@@ -24,4 +27,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.08
+version: 0.09

@@ -1,11 +1,15 @@
 package SHARYANTO::Array::Util;
 
 use 5.010;
+use strict;
+use warnings;
+use Data::Clone;
+
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.08'; # VERSION
+our $VERSION = '0.09'; # VERSION
 
 our %SPEC;
 
@@ -35,7 +39,8 @@ sub match_array_or_regex {
 }
 
 *match_regex_or_array = \&match_array_or_regex;
-$SPEC{match_regex_or_array} = $SPEC{match_array_or_regex};
+$SPEC{match_regex_or_array} = clone $SPEC{match_array_or_regex};
+$SPEC{match_regex_or_array}{summary} = 'Alias for match_array_or_regex';
 
 1;
 # ABSTRACT: Array-related utilities
@@ -50,7 +55,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -60,7 +65,7 @@ version 0.08
 
 None are exported by default, but they are exportable.
 
-=head2 match_regex_or_array(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
+=head2 match_array_or_regex(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
 
 
 Check whether an item matches array of values or regex.
@@ -86,7 +91,7 @@ Arguments (C<*> denotes required arguments):
 =head2 match_regex_or_array(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
 
 
-Check whether an item matches array of values or regex.
+Alias for match_array_or_regex.
 
 Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
 between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error

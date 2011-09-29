@@ -5,12 +5,13 @@ use strict;
 use warnings;
 
 use Fcntl qw(:DEFAULT :flock);
+use File::Which;
 use FindBin;
 use IO::Select;
 use POSIX;
 use Symbol;
 
-our $VERSION = '0.08'; # VERSION
+our $VERSION = '0.09'; # VERSION
 
 # --- globals
 
@@ -31,6 +32,12 @@ sub new {
 
     die "BUG: Please specify main_loop routine"
         unless $args{main_loop};
+
+    if ($args{on_client_disconnect}) {
+        die "netstat is not available in PATH"
+            unless -x which("netstat");
+        require Parse::Netstat;
+    }
 
     $args{parent_pid} = $$;
     $args{children} = {}; # key = pid
@@ -349,19 +356,19 @@ sub run {
         }
         $self->parent_sig_handlers;
 
-        # and maintain the population
+        # maintain children population and do cleaning tasks
         my $i = 0;
         my $j = 0; # number of increments of child when busy
         my $k = 0; # number of decrements of child when idle
         my $max_children_warned;
         while (1) {
-            #sleep; # wait for a signal (i.e., child's death)
             sleep 1;
             if ($self->{auto_reload_check_every} &&
                     $i++ >= $self->{auto_reload_check_every}) {
                 $self->check_reload_self;
                 $i = 0;
             }
+
             # top up child pool until at least 'prefork'
             if (keys(%{$self->{children}}) < $self->{prefork}) {
                 #warn "Topping up child pool to $self->{prefork}\n";
@@ -370,54 +377,92 @@ sub run {
                     $self->make_new_child(); # top up the child pool
                 }
             }
+
+            my $scoreboard;
+
+            if (rand()*5 >= 4 && $self->{on_client_disconnect}) {
+                {
+                    my $output;
+                    {
+                        local $SIG{CHLD} = 'DEFAULT';
+                        $output = `netstat -anp 2>/dev/null`;
+                    }
+                    my $res    = Parse::Netstat::parse_netstat(
+                        output => $output, udp=>0, unix=>0);
+                    # currently unix stats is useless, everything is
+                    # CONNECTED/CONNECTING and no pid
+                    die "Bug: Netstat output can't be parsed: ".
+                        "$res->[0] - $res->[1]" unless $res->[0] == 200;
+                    my $conns = $res->[2]{active_conns};
+                    my %called_children;
+                    for my $conn (@$conns) {
+                        my $pid = $conn->{pid};
+                        next unless $pid;
+                        next unless $conn->{state} =~ /(?:FIN_WAIT|CLOSE_WAIT)/;
+                        next unless $self->{children}{ $pid };
+                        next if $called_children{$pid}++;
+                        $self->{on_client_disconnect}->(
+                            pid => $pid,
+                            local_host => $conn->{local_host},
+                            local_port => $conn->{local_port},
+                            foreign_host => $conn->{foreign_host},
+                            foreign_port => $conn->{foreign_port},
+                        );
+                    }
+                }
+            }
+
             # if busy, autoadjust child pool until at least 'max_children', and
             # decrease it again when idle
             if (rand()*4 >= 3) {
-                my $res = $self->read_scoreboard;
-                if ($res) {
-                    if ($res->{num_busy} && $res->{num_idle} <= 1) {
+                $scoreboard = $self->read_scoreboard;
+                if ($scoreboard) {
+                    if ($scoreboard->{num_busy} &&
+                            $scoreboard->{num_idle} <= 1) {
                         warn "max_children ($self->{max_children} reached, ".
                             "consider increasing it)\n" if
-                                $res->{num_children} >= $self->{max_children}
-                                    && !$max_children_warned++;
+                                $scoreboard->{num_children} >=
+                                    $self->{max_children}
+                                        && !$max_children_warned++;
                         $j++;
                         #warn "Autoadjust: increase number of children ".
-                        #    "($j*2, $res->{num_children} -> .)\n";
+                        #    "($j*2, $scoreboard->{num_children} -> .)\n";
                         for (1..$j*2) {
-                            last if
-                                $res->{num_children} >= $self->{max_children};
+                            last if $scoreboard->{num_children} >=
+                                $self->{max_children};
                             $self->make_new_child();
-                            $res->{num_chilren}++;
+                            $scoreboard->{num_chilren}++;
                         }
                     } else {
                         $j = 0;
                     }
 
                     # disable temporarily, not yet working properly
-                    if (0 && $res->{num_idle} >= 3 &&
-                            $res->{num_children} > $self->{prefork}) {
+                    if (0 && $scoreboard->{num_idle} >= 3 &&
+                            $scoreboard->{num_children} > $self->{prefork}) {
                         $k++;
                         #warn "Autoadjust: decrease number of children ".
-                        #    "($k*2, $res->{num_children} -> .)\n";
+                        #    "($k*2, $scoreboard->{num_children} -> .)\n";
 
                         # sort by oldest idle
-                        my @pids = sort { $res->{children}{$a}{mtime} <=>
-                                              $res->{children}{$b}{mtime} }
-                            grep {$res->{children}{$_}{state} eq '_'}
-                                keys %{$res->{children}};
+                        my @pids = sort {
+                            $scoreboard->{children}{$a}{mtime} <=>
+                                $scoreboard->{children}{$b}{mtime} }
+                            grep {$scoreboard->{children}{$_}{state} eq '_'}
+                                keys %{$scoreboard->{children}};
                         for (1..$k*2) {
                             last if
-                                $res->{num_children} <= $self->{prefork};
+                                $scoreboard->{num_children} <= $self->{prefork};
                             if (@pids) {
                                 # pick oldest idle child and kill it
                                 my $pid = shift @pids;
                                 if ($pid) {
                                     kill TERM => $pid;
-                                    $res->{num_chilren}--;
-                                    delete $res->{children}{$pid};
-                                    delete $self->{children}{$pid};
-                                    #warn "Killed process $pid ".
-                                    #   "(num_children=$res->{num_children})\n";
+                                    $scoreboard->{num_chilren}--;
+                                    delete $scoreboard->{children}{$pid};
+                                    delete $scoreboard->{children}{$pid};
+                                    #warn "Killed process $pid (num_children=".
+                                    #    "$scoreboard->{num_children})\n";
                                 }
                             }
                         }
@@ -426,6 +471,7 @@ sub run {
                     }
                 }
             }
+
         }
     } else {
         $self->{main_loop}->();
@@ -541,7 +587,8 @@ sub check_reload_self {
         }
 
         for (keys %INC) {
-            # sometimes it's undef, e.g. Params/ValidateXS.pm (directly manipulate %INC?)
+            # sometimes it's undef, e.g. Params/ValidateXS.pm (directly
+            # manipulate %INC?)
             next unless defined($INC{$_});
             my $new_module_mtime = (-M $INC{$_});
             if (defined($modules_mtime->{$_})) {
@@ -579,7 +626,7 @@ SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =for Pod::Coverage .
 
@@ -636,6 +683,25 @@ In seconds.
 Run after the daemon initializes itself (daemonizes, writes PID file, etc),
 before spawning children. You usually bind to sockets here (if your daemon is a
 network server).
+
+=item * on_client_disconnect => CODEREF
+
+Do something after socket connection between client and child process is closed.
+This requires scoreboard (see C<scoreboard_path> argument) to record all the
+children's PIDs, and also the "netstat" command and L<Parse::Netstat> module to
+check for connections.
+
+This can be used, for example, to kill child process (cancel job) on disconnect.
+
+Will be called for each child server being disconnected. Code will receive a
+hash containing: C<pid>, C<proto>, C<local_host>, C<local_port>,
+C<foreign_host>, C<foreign_port>.
+
+Note that monitoring connections is done every few seconds by the parent
+process, so this code will not be run immediately after closing of connection.
+
+Currently only works for TCP connections and not Unix connections, due to lack
+of information provided by "netstat" for Unix connections.
 
 =item * main_loop* => CODEREF
 

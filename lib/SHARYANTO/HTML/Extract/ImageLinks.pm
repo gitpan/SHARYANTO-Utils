@@ -11,7 +11,7 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.10'; # VERSION
+our $VERSION = '0.11'; # VERSION
 
 our %SPEC;
 
@@ -79,36 +79,11 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 FUNCTIONS
 
 None are exported by default, but they are exportable.
-
-=head2 extract_image_links(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
-
-
-Extract image links from HTML document.
-
-Either specify either url, html.
-
-Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
-between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
-message, RESULT is the actual result.
-
-Arguments (C<*> denotes required arguments):
-
-=over 4
-
-=item * B<base> => I<str>
-
-base URL for images.
-
-=item * B<html> => I<str>
-
-HTML document to extract from.
-
-=back
 
 =head1 AUTHOR
 

@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(detect_http_ua_simple);
 
-our $VERSION = '0.10'; # VERSION
+our $VERSION = '0.11'; # VERSION
 
 our %SPEC;
 
@@ -65,8 +65,8 @@ _
         {url => "pm://Parse::HTTP::UserAgent", tags => ['see']},
         {url => "pm://HTTP::headers::UserAgent", tags => ['see']},
     ],
-    "_peri.accept_args" => "array",
-    "_peri.result_enveloped" => 0,
+    args_as => "array",
+    result_naked => 0,
 };
 
 sub detect_http_ua_simple {
@@ -118,7 +118,7 @@ SHARYANTO::HTTP::DetectUA::Simple - A very simple and generic browser detection 
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 DESCRIPTION
 

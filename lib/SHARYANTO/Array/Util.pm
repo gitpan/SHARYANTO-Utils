@@ -9,32 +9,56 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.10'; # VERSION
+our $VERSION = '0.11'; # VERSION
 
 our %SPEC;
 
+my $_str_or_re = ['any*'=>{of=>['regex*','str*']}];
+
 $SPEC{match_array_or_regex} = {
-    summary => 'Check whether an item matches array of values or regex',
+    v => 1.1,
+    summary => 'Check whether an item matches (list of) values/regexes',
+    description => <<'_',
+
+This routine can be used to match an item against a regex or a list of
+strings/regexes, e.g. when matching against an ACL.
+
+_
+    examples => [
+        {args=>{needle=>"abc", haystack=>["abc", "abd"]}, result=>1},
+        {args=>{needle=>"abc", haystack=>qr/ab./}, result=>1},
+        {args=>{needle=>"abc", haystack=>[qr/ab./, "abd"]}, result=>1},
+    ],
     args_as => 'array',
     args => {
-        needle => ["str*" => {
-            arg_pos => 0,
-        }],
-        haystack => ["any*" => {
-            of => [["array*"=>{of=>"str*"}], "str*"], # XXX 2nd should be regex*
-            arg_pos => 1,
-        }],
+        needle => {
+            schema => ["str*"],
+            pos => 0,
+            req => 1,
+        },
+        haystack => {
+            # XXX checking this schema might actually take longer than matching
+            # the needle! so when arg validation is implemented, provide a way
+            # to skip validating this schema
+            schema => ["any*" => {
+                of => [$_str_or_re, ["array*"=>{of=>$_str_or_re}]]}],
+            pos => 1,
+            req => 1,
+        },
     },
+    result_naked => 1,
 };
 sub match_array_or_regex {
     my ($needle, $haystack) = @_;
     my $ref = ref($haystack);
-    if ($ref eq 'Regexp') {
-        return $needle =~ $haystack;
-    } elsif ($ref eq 'ARRAY') {
+    if ($ref eq 'ARRAY') {
         return $needle ~~ @$haystack;
+    } elsif (!$ref) {
+        return $needle =~ /$haystack/;
+    } elsif ($ref eq 'Regexp') {
+        return $needle =~ $haystack;
     } else {
-        die "Can't match when haystack is a $ref";
+        die "Invalid haystack, must be regex or array of strings/regexes";
     }
 }
 
@@ -55,7 +79,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -64,52 +88,6 @@ version 0.10
 =head1 FUNCTIONS
 
 None are exported by default, but they are exportable.
-
-=head2 match_array_or_regex(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
-
-
-Check whether an item matches array of values or regex.
-
-Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
-between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
-message, RESULT is the actual result.
-
-Arguments (C<*> denotes required arguments):
-
-=over 4
-
-=item * B<needle>* => I<str>
-
-1st argument ($args[0]).
-
-=item * B<haystack>* => I<array|str>
-
-2nd argument ($args[1]).
-
-=back
-
-=head2 match_regex_or_array(@args) -> [STATUS_CODE, ERR_MSG, RESULT]
-
-
-Alias for match_array_or_regex.
-
-Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
-between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
-message, RESULT is the actual result.
-
-Arguments (C<*> denotes required arguments):
-
-=over 4
-
-=item * B<needle>* => I<str>
-
-1st argument ($args[0]).
-
-=item * B<haystack>* => I<array|str>
-
-2nd argument ($args[1]).
-
-=back
 
 =head1 AUTHOR
 

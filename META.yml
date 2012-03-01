@@ -19,6 +19,7 @@ requires:
   File::Which: 0
   HTML::Parser: 0
   Parse::Netstat: 0
+  Rinci: 1.1.0
   Template::Tiny: 0
   Test::More: 0.96
   URI: 0
@@ -27,4 +28,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.10
+version: 0.11

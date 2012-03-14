@@ -7,6 +7,7 @@ META.yml
 README
 dist.ini
 lib/SHARYANTO/Array/Util.pm
+lib/SHARYANTO/Doc/Base.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
 lib/SHARYANTO/Package/Util.pm

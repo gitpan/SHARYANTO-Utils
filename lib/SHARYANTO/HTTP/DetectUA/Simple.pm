@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(detect_http_ua_simple);
 
-our $VERSION = '0.14'; # VERSION
+our $VERSION = '0.15'; # VERSION
 
 our %SPEC;
 
@@ -118,7 +118,7 @@ SHARYANTO::HTTP::DetectUA::Simple - A very simple and generic browser detection 
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 DESCRIPTION
 

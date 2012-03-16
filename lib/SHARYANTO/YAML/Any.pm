@@ -28,7 +28,7 @@ SHARYANTO::YAML::Any - Pick a YAML implementation and use it.
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =for Pod::Coverage .*
 

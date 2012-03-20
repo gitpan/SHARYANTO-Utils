@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.15'; # VERSION
+our $VERSION = '0.16'; # VERSION
 
 has lang => (
     is => 'rw',
@@ -62,7 +62,7 @@ SHARYANTO::Role::I18N - Role for internationalized class
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 DESCRIPTION
 
@@ -89,6 +89,8 @@ C<lh->maketext(...)>.
 =head2 $doc->loc(@args) => STR
 
 Shortcut for C<$doc->lh->maketext(@args)>.
+
+=head1 FUNCTIONS
 
 =head1 AUTHOR
 

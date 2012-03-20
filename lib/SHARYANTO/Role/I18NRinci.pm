@@ -5,7 +5,7 @@ use Log::Any '$log';
 use Moo::Role;
 use Perinci::Object;
 
-our $VERSION = '0.15'; # VERSION
+our $VERSION = '0.16'; # VERSION
 
 with 'SHARYANTO::Role::I18N';
 
@@ -31,7 +31,9 @@ SHARYANTO::Role::I18NRinci - Role for class that wants to work with language and
 
 =head1 VERSION
 
-version 0.15
+version 0.16
+
+=head1 FUNCTIONS
 
 =head1 AUTHOR
 

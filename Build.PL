@@ -17,7 +17,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "SHARYANTO-Utils",
-  "dist_version" => "0.15",
+  "dist_version" => "0.16",
   "license" => "perl",
   "module_name" => "SHARYANTO::Utils",
   "recommends" => {},
@@ -29,6 +29,7 @@ my %module_build_args = (
     "HTML::Parser" => 0,
     "Locale::Maketext" => 0,
     "Locale::Maketext::Lexicon" => 0,
+    "Log::Any" => 0,
     "Parse::Netstat" => 0,
     "Perinci::Object" => "0.07",
     "Rinci" => "1.1.0",

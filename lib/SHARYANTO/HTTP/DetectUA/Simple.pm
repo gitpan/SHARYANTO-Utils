@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(detect_http_ua_simple);
 
-our $VERSION = '0.15'; # VERSION
+our $VERSION = '0.16'; # VERSION
 
 our %SPEC;
 
@@ -41,6 +41,7 @@ because it does significantly less.
 _
     args => {
         env => {
+            pos => 0,
             summary => 'CGI-compatible environment, e.g. \%ENV or PSGI\'s $env',
         },
     },
@@ -118,14 +119,58 @@ SHARYANTO::HTTP::DetectUA::Simple - A very simple and generic browser detection 
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 DESCRIPTION
 
-=for comment DESCRIPTION and FUNCTIONS section will be filled by BY
-Pod::Weaver::Plugin::Perinci.
+
+I needed a simple and fast routine which can detect whether HTTP client is a GUI
+browser (like Chrome or Firefox), a text browser (like Lynx or Links), or
+neither (like curl, or L). Hence, this module.
 
 =head1 FUNCTIONS
+
+
+=head2 detect_http_ua_simple(%args) -> [status, msg, result, meta]
+
+Detect whether HTTP client is a GUI/TUI browser.
+
+This function is a simple and fast routine to detect whether HTTP client is a
+GUI browser (like Chrome or Firefox), a text-based browser (like Lynx or Links),
+or neither (like curl or LWP). Extra information can be provided in the future.
+
+Currently these heuristic rules are used:
+
+=over
+
+=item *
+
+check popular browser markers in User-Agent header (e.g. 'Chrome', 'Opera');
+
+
+=item *
+
+check Accept header for 'image/';
+
+
+=back
+
+It is several times faster than the other equivalent Perl modules, this is
+because it does significantly less.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<env> => I<any>
+
+CGI-compatible environment, e.g. \%ENV or PSGI's $env.
+
+=back
+
+Return value:
+
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =head1 AUTHOR
 

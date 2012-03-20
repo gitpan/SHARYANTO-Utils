@@ -2,7 +2,7 @@ NAME
     SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 VERSION
-    version 0.15
+    version 0.16
 
 FAQ
   What is this?
@@ -21,6 +21,7 @@ FAQ
 
     I assure you that this is not a vanity distribution :-)
 
+FUNCTIONS
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 

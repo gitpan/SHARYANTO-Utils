@@ -11,7 +11,7 @@ use IO::Select;
 use POSIX;
 use Symbol;
 
-our $VERSION = '0.15'; # VERSION
+our $VERSION = '0.16'; # VERSION
 
 # --- globals
 
@@ -626,7 +626,7 @@ SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =for Pod::Coverage .
 
@@ -717,6 +717,8 @@ daemon. You usually do this in your main loop routine:
 Run before killing children and shutting down.
 
 =back
+
+=head1 FUNCTIONS
 
 =head1 AUTHOR
 

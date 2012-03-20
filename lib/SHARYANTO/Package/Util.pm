@@ -4,7 +4,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(package_exists);
 
-our $VERSION = '0.15'; # VERSION
+our $VERSION = '0.16'; # VERSION
 
 sub package_exists {
     my $pkg = shift;
@@ -30,7 +30,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
@@ -52,6 +52,8 @@ table (e.g. C<$Foo::var = 1;> will make the C<Foo> package "exist").
 
 This function can be used e.g. for checking before aliasing one package to
 another. Or to casually check whether a module has been loaded.
+
+=head1 FUNCTIONS
 
 =head1 AUTHOR
 

@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.16'; # VERSION
+our $VERSION = '0.17'; # VERSION
 
 has langs => (
     is => 'rw',
@@ -34,11 +34,13 @@ sub lh {
 
     my $lh = $obj->get_handle($lang)
         or die "Can't get language handle for lang=$lang";
+    #$log->tracef("lhs=%s, lh=%s", $lhs, $lh);
+    my $c = ref($lh);
     my %class;
-    for (my ($l, $h) = each %$lh) {
-        my $c = ref($h);
-        die "Lang=$lang falls back to lang=$l (class=$c)" if $class{$c};
-        $class{$c} = $l;
+    for (my ($l, $h) = each %$lhs) {
+        my $c2 = ref($h);
+        die "Lang=$lang falls back to lang=$l (class=$c2)" if $class{$c};
+        $class{$c2} = $l;
     }
 
     $lhs->{$lang} = $lh;
@@ -47,7 +49,7 @@ sub lh {
 
 sub locl {
     my ($self, $lang, @args) = @_;
-    $self->get_lh($lang)->maketext(@args);
+    $self->lh($lang)->maketext(@args);
 }
 
 
@@ -64,7 +66,7 @@ SHARYANTO::Role::I18NMany - Role for internationalized class
 
 =head1 VERSION
 
-version 0.16
+version 0.17
 
 =head1 DESCRIPTION
 

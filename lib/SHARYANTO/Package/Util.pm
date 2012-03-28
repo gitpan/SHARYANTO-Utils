@@ -4,7 +4,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(package_exists);
 
-our $VERSION = '0.18'; # VERSION
+our $VERSION = '0.19'; # VERSION
 
 sub package_exists {
     my $pkg = shift;
@@ -30,7 +30,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 

@@ -32,4 +32,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.19
+version: 0.20

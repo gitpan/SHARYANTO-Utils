@@ -21,6 +21,7 @@ requires:
   Locale::Maketext: 0
   Locale::Maketext::Lexicon: 0
   Log::Any: 0
+  Moo: 0
   Parse::Netstat: 0
   Perinci::Object: 0.07
   Rinci: 1.1.0
@@ -32,4 +33,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.20
+version: 0.21

@@ -7,7 +7,8 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Module::Build" => "0.3601"
+    "Module::Build" => "0.3601",
+    "Test::More" => "0.96"
   },
   "configure_requires" => {
     "Module::Build" => "0.3601"
@@ -17,7 +18,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "SHARYANTO-Utils",
-  "dist_version" => "0.21",
+  "dist_version" => "0.22",
   "license" => "perl",
   "module_name" => "SHARYANTO::Utils",
   "recommends" => {},
@@ -35,7 +36,6 @@ my %module_build_args = (
     "Perinci::Object" => "0.07",
     "Rinci" => "1.1.0",
     "Template::Tiny" => 0,
-    "Test::More" => "0.96",
     "URI" => 0,
     "YAML::Syck" => 0,
     "perl" => "5.010000"

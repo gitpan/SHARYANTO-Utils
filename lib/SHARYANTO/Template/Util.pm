@@ -9,7 +9,7 @@ use File::Find;
 use File::Slurp;
 use Template::Tiny;
 
-our $VERSION = '0.22'; # VERSION
+our $VERSION = '0.23'; # VERSION
 
 # recursively find *.tt and process them. can optionally delete the *.tt files
 # after processing.
@@ -43,9 +43,17 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-version 0.22
+version 0.23
+
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

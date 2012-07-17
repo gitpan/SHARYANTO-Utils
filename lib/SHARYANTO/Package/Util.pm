@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
                        list_subpackages
                );
 
-our $VERSION = '0.22'; # VERSION
+our $VERSION = '0.23'; # VERSION
 
 sub package_exists {
     no strict 'refs';
@@ -40,6 +40,11 @@ sub list_package_contents {
     while (my ($k, $v) = each %$symtbl) {
         next if $k =~ /::$/; # subpackage
         my $n;
+        if ("$v" !~ /^\*/) {
+            # constant
+            $res{$k} = $v;
+            next;
+        }
         if (defined *$v{CODE}) {
             $res{$k} = *$v{CODE}; # subroutine
             $n++;
@@ -99,7 +104,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =head1 SYNOPSIS
 
@@ -155,7 +160,15 @@ If $recursive is true, will also list subpackages of subpackages, and so on.
 
 L<perlmod>
 
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
+
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

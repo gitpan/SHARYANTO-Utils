@@ -5,7 +5,7 @@ use Log::Any '$log';
 use Moo::Role;
 use Perinci::Object;
 
-our $VERSION = '0.22'; # VERSION
+our $VERSION = '0.23'; # VERSION
 
 with 'SHARYANTO::Role::I18N';
 
@@ -31,9 +31,17 @@ SHARYANTO::Role::I18NRinci - Role for class that wants to work with language and
 
 =head1 VERSION
 
-version 0.22
+version 0.23
+
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

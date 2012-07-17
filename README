@@ -2,7 +2,7 @@ NAME
     SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 VERSION
-    version 0.22
+    version 0.23
 
 FAQ
   What is this?
@@ -21,7 +21,12 @@ FAQ
 
     I assure you that this is not a vanity distribution :-)
 
+DESCRIPTION
+    This module has Rinci metadata.
+
 FUNCTIONS
+    None are exported by default, but they are exportable.
+
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 

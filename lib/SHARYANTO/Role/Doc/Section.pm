@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.22'; # VERSION
+our $VERSION = '0.23'; # VERSION
 
 has doc_sections => (is=>'rw');
 has doc_lines => (is => 'rw'); # store final result, array
@@ -119,7 +119,7 @@ SHARYANTO::Role::Doc::Section - Role for class that generates documentation with
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =head1 DESCRIPTION
 
@@ -174,7 +174,15 @@ Character(s) used for indent.
 
 This module is used, among others, by: C<Perinci::To::*> modules.
 
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
+
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

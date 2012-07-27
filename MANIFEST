@@ -8,6 +8,7 @@ META.yml
 README
 dist.ini
 lib/SHARYANTO/Array/Util.pm
+lib/SHARYANTO/File/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
 lib/SHARYANTO/Package/Util.pm
@@ -26,6 +27,7 @@ lib/SHARYANTO/YAML/Any_YAMLAny.pm
 t/00-compile.t
 t/array_util.t
 t/detect_http_ua_simple.t
+t/file_util.t
 t/package_util.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t

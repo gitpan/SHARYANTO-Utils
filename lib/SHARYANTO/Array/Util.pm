@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.25'; # VERSION
+our $VERSION = '0.26'; # VERSION
 
 our %SPEC;
 
@@ -79,7 +79,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 
@@ -89,17 +89,10 @@ version 0.25
 
 None are exported by default, but they are exportable.
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
-=head2 match_array_or_regex(@args) -> any
+=head2 match_array_or_regex(%args) -> [status, msg, result, meta]
 
 Check whether an item matches (list of) values/regexes.
 
@@ -118,7 +111,9 @@ Arguments ('*' denotes required arguments):
 
 Return value:
 
-=head2 match_regex_or_array(@args) -> any
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+
+=head2 match_regex_or_array(%args) -> [status, msg, result, meta]
 
 Alias for match_array_or_regex.
 
@@ -136,6 +131,8 @@ Arguments ('*' denotes required arguments):
 =back
 
 Return value:
+
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =head1 AUTHOR
 

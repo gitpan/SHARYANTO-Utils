@@ -3,12 +3,13 @@ abstract: "SHARYANTO's temporary namespace for various routines"
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
+  File::chdir: 0
   Module::Build: 0.3601
   Test::More: 0.96
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640'
+generated_by: 'Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -19,18 +20,17 @@ requires:
   File::Slurp: 0
   File::Which: 0
   HTML::Parser: 0
-  Locale::Maketext: 0
   Locale::Maketext::Lexicon: 0
   Log::Any: 0
-  Moo: 0
+  Moo::Role: 0
   Parse::Netstat: 0
   Perinci::Object: 0.07
-  Rinci: 1.1.0
+  Rinci: v1.1.0
   Template::Tiny: 0
-  URI: 0
+  URI::URL: 0
   YAML::Syck: 0
   perl: 5.010000
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.25
+version: 0.26

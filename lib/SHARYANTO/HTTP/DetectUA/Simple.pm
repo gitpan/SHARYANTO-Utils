@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(detect_http_ua_simple);
 
-our $VERSION = '0.25'; # VERSION
+our $VERSION = '0.26'; # VERSION
 
 our %SPEC;
 
@@ -119,7 +119,7 @@ SHARYANTO::HTTP::DetectUA::Simple - A very simple and generic browser detection 
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 DESCRIPTION
 
@@ -128,14 +128,10 @@ I needed a simple and fast routine which can detect whether HTTP client is a GUI
 browser (like Chrome or Firefox), a text browser (like Lynx or Links), or
 neither (like curl, or L). Hence, this module.
 
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
-=head2 detect_http_ua_simple(@args) -> [status, msg, result, meta]
+=head2 detect_http_ua_simple(%args) -> [status, msg, result, meta]
 
 Detect whether HTTP client is a GUI/TUI browser.
 

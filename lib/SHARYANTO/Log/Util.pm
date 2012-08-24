@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(@log_levels $log_levels_re);
 
-our $VERSION = '0.25'; # VERSION
+our $VERSION = '0.26'; # VERSION
 
 our @log_levels = (qw/trace debug info warn error fatal/);
 our $log_levels_re = join("|", @log_levels);
@@ -27,7 +27,7 @@ SHARYANTO::Log::Util - Log-related utilities
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 
@@ -55,15 +55,7 @@ Contains regular expression to check valid log levels.
 
 L<Log::Any>
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

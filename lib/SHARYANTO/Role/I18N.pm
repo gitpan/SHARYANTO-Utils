@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.26'; # VERSION
+our $VERSION = '0.27'; # VERSION
 
 has lang => (
     is => 'rw',
@@ -62,7 +62,7 @@ SHARYANTO::Role::I18N - Role for internationalized class
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
@@ -90,7 +90,15 @@ C<lh->maketext(...)>.
 
 Shortcut for C<$doc->lh->maketext(@args)>.
 
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
+
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

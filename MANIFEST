@@ -11,6 +11,7 @@ lib/SHARYANTO/Array/Util.pm
 lib/SHARYANTO/File/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
+lib/SHARYANTO/Hash/Util.pm
 lib/SHARYANTO/Log/Util.pm
 lib/SHARYANTO/Package/Util.pm
 lib/SHARYANTO/Proc/ChildError.pm
@@ -29,8 +30,10 @@ t/00-compile.t
 t/array_util.t
 t/detect_http_ua_simple.t
 t/file_util.t
+t/hash_util.t
 t/log_util.t
 t/package_util.t
+t/proc_childerror.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 weaver.ini

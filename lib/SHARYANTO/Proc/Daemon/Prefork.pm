@@ -11,7 +11,7 @@ use IO::Select;
 use POSIX;
 use Symbol;
 
-our $VERSION = '0.27'; # VERSION
+our $VERSION = '0.28'; # VERSION
 
 # --- globals
 
@@ -588,8 +588,8 @@ sub check_reload_self {
         }
 
         for (keys %INC) {
-            # sometimes it's undef, e.g. Params/ValidateXS.pm (directly
-            # manipulate %INC?)
+            # undef entry in %INC can mean require() has failed loading it, skip
+            # this for now
             next unless defined($INC{$_});
             my $new_module_mtime = (-M $INC{$_});
             if (defined($modules_mtime->{$_})) {
@@ -627,7 +627,7 @@ SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =for Pod::Coverage .
 

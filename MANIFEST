@@ -20,6 +20,7 @@ lib/SHARYANTO/Role/Doc/Section.pm
 lib/SHARYANTO/Role/I18N.pm
 lib/SHARYANTO/Role/I18NMany.pm
 lib/SHARYANTO/Role/I18NRinci.pm
+lib/SHARYANTO/Scalar/Util.pm
 lib/SHARYANTO/Template/Util.pm
 lib/SHARYANTO/Text/Prompt.pm
 lib/SHARYANTO/Utils.pm
@@ -36,4 +37,5 @@ t/package_util.t
 t/proc_childerror.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
+t/scalar_util.t
 weaver.ini

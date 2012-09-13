@@ -1,6 +1,6 @@
 package SHARYANTO::Utils;
 
-our $VERSION = '0.28'; # VERSION
+our $VERSION = '0.29'; # VERSION
 
 1;
 # ABSTRACT: SHARYANTO's temporary namespace for various routines
@@ -14,7 +14,7 @@ SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 =head1 VERSION
 
-version 0.28
+version 0.29
 
 =head1 FAQ
 

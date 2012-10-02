@@ -8,7 +8,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(prompt);
 
-our $VERSION = '0.29'; # VERSION
+our $VERSION = '0.30'; # VERSION
 
 sub prompt {
     my ($text, $opts) = @_;
@@ -67,7 +67,7 @@ SHARYANTO::Text::Prompt - Prompt user question
 
 =head1 VERSION
 
-version 0.29
+version 0.30
 
 =head1 FUNCTIONS
 

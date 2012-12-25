@@ -11,7 +11,7 @@ use IO::Select;
 use POSIX;
 use Symbol;
 
-our $VERSION = '0.31'; # VERSION
+our $VERSION = '0.32'; # VERSION
 
 # --- globals
 
@@ -627,7 +627,7 @@ SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.31
+version 0.32
 
 =for Pod::Coverage .*
 

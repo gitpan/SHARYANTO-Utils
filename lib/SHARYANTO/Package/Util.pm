@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
                        list_subpackages
                );
 
-our $VERSION = '0.31'; # VERSION
+our $VERSION = '0.32'; # VERSION
 
 sub package_exists {
     no strict 'refs';
@@ -104,7 +104,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.31
+version 0.32
 
 =head1 SYNOPSIS
 

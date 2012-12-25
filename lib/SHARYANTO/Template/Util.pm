@@ -9,7 +9,7 @@ use File::Find;
 use File::Slurp;
 use Template::Tiny;
 
-our $VERSION = '0.30'; # VERSION
+our $VERSION = '0.31'; # VERSION
 
 # recursively find *.tt and process them. can optionally delete the *.tt files
 # after processing.
@@ -34,6 +34,7 @@ sub process_tt_recursive {
 1;
 # ABSTRACT: Recursively process .tt files
 
+
 __END__
 =pod
 
@@ -43,7 +44,11 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-version 0.30
+version 0.31
+
+=head1 FUNCTIONS
+
+=head2 process_tt_recursive($dir, $vars, $opts)
 
 =head1 DESCRIPTION
 

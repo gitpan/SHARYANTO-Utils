@@ -5,7 +5,7 @@ use Log::Any '$log';
 use Moo::Role;
 use Perinci::Object;
 
-our $VERSION = '0.30'; # VERSION
+our $VERSION = '0.31'; # VERSION
 
 with 'SHARYANTO::Role::I18N';
 
@@ -22,6 +22,7 @@ sub langprop {
 1;
 # ABSTRACT: Role for class that wants to work with language and Rinci metadata
 
+
 __END__
 =pod
 
@@ -31,7 +32,11 @@ SHARYANTO::Role::I18NRinci - Role for class that wants to work with language and
 
 =head1 VERSION
 
-version 0.30
+version 0.31
+
+=head1 METHODS
+
+=head2 $obj->langprop($meta, $prop)
 
 =head1 DESCRIPTION
 

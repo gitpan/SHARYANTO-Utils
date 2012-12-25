@@ -11,11 +11,12 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.30'; # VERSION
+our $VERSION = '0.31'; # VERSION
 
 our %SPEC;
 
 $SPEC{extract_image_links} = {
+    v => 1.1,
     summary => 'Extract image links from HTML document',
     description => <<'_',
 
@@ -23,20 +24,22 @@ Either specify either url, html.
 
 _
     args => {
-        html => ['str' => {
+        html => {
+            schema => 'str*',
+            req => 1,
             summary => 'HTML document to extract from',
-            arg_from_stdin => 1,
-        }],
-        base => ['str' => {
+            cmdline_src => 'stdin_or_files',
+        },
+        base => {
+            schema => 'str',
             summary => 'base URL for images',
-        }],
+        },
     },
 };
 sub extract_image_links {
     my %args = @_;
 
     my $html = $args{html};
-    defined($html) or return [400, "Please specify html"];
     my $base = $args{base};
 
     # get base from <BASE HREF> if exists
@@ -79,7 +82,7 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.30
+version 0.31
 
 =head1 FUNCTIONS
 
@@ -109,7 +112,7 @@ Arguments ('*' denotes required arguments):
 
 base URL for images.
 
-=item * B<html> => I<str>
+=item * B<html>* => I<str>
 
 HTML document to extract from.
 

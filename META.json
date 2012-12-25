@@ -24,6 +24,11 @@
             "Module::Build" : "0.3601"
          }
       },
+      "develop" : {
+         "requires" : {
+            "Test::Rinci" : "0.01"
+         }
+      },
       "runtime" : {
          "requires" : {
             "Data::Clone" : 0,
@@ -57,6 +62,6 @@
          "url" : "http://github.com/sharyanto/perl-SHARYANTO-Utils"
       }
    },
-   "version" : "0.30"
+   "version" : "0.31"
 }
 

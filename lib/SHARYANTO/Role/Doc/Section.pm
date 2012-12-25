@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.30'; # VERSION
+our $VERSION = '0.31'; # VERSION
 
 has doc_sections => (is=>'rw');
 has doc_lines => (is => 'rw'); # store final result, array
@@ -119,7 +119,7 @@ SHARYANTO::Role::Doc::Section - Role for class that generates documentation with
 
 =head1 VERSION
 
-version 0.30
+version 0.31
 
 =head1 DESCRIPTION
 
@@ -160,7 +160,13 @@ Character(s) used for indent.
 
 =head2 add_doc_section_after($name, $anchor)
 
+=head2 after_generate_doc()
+
+=head2 before_generate_doc()
+
 =head2 delete_doc_section($name)
+
+=head2 doc_lines()
 
 =head2 add_doc_lines(@lines)
 

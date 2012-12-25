@@ -8,6 +8,7 @@ META.yml
 README
 dist.ini
 lib/SHARYANTO/Array/Util.pm
+lib/SHARYANTO/File/Flock.pm
 lib/SHARYANTO/File/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
@@ -37,5 +38,6 @@ t/package_util.t
 t/proc_childerror.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
+t/release-rinci.t
 t/scalar_util.t
 weaver.ini

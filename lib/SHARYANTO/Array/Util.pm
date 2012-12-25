@@ -9,11 +9,11 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.30'; # VERSION
+our $VERSION = '0.31'; # VERSION
 
 our %SPEC;
 
-my $_str_or_re = ['any*'=>{of=>['regex*','str*']}];
+my $_str_or_re = ['any*'=>{of=>['re*','str*']}];
 
 $SPEC{match_array_or_regex} = {
     v => 1.1,
@@ -40,8 +40,11 @@ _
             # XXX checking this schema might actually take longer than matching
             # the needle! so when arg validation is implemented, provide a way
             # to skip validating this schema
+
             schema => ["any*" => {
-                of => [$_str_or_re, ["array*"=>{of=>$_str_or_re}]]}],
+                # turned off temporarily 2012-12-25, Data::Sah is currently broken
+                #of => [$_str_or_re, ["array*"=>{of=>$_str_or_re}]],
+            }],
             pos => 1,
             req => 1,
         },
@@ -79,7 +82,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.30
+version 0.31
 
 =head1 SYNOPSIS
 
@@ -110,7 +113,7 @@ Arguments ('*' denotes required arguments):
 
 =over 4
 
-=item * B<haystack>* => I<any|array>
+=item * B<haystack>* => I<any>
 
 =item * B<needle>* => I<str>
 
@@ -129,7 +132,7 @@ Arguments ('*' denotes required arguments):
 
 =over 4
 
-=item * B<haystack>* => I<any|array>
+=item * B<haystack>* => I<any>
 
 =item * B<needle>* => I<str>
 

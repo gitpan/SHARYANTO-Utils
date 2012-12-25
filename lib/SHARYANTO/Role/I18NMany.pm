@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.30'; # VERSION
+our $VERSION = '0.31'; # VERSION
 
 has langs => (
     is => 'rw',
@@ -66,7 +66,7 @@ SHARYANTO::Role::I18NMany - Role for internationalized class
 
 =head1 VERSION
 
-version 0.30
+version 0.31
 
 =head1 DESCRIPTION
 
@@ -76,13 +76,14 @@ first argument.
 
 =head1 ATTRIBUTES
 
-=head2 lang
+=head2 langs => ARRAY
 
-Defaults to LANG or LANGUAGE environment variable, or C<en_US>.
+Defaults to a single element array with value of LANG or LANGUAGE environment
+variable, or C<en_US>.
 
-=head2 loc_class
+=head2 loc_class => STR
 
-Project class. Defaults to $class::I18N.
+Project class name. Defaults to $class::I18N.
 
 =head1 METHODS
 

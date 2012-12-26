@@ -6,6 +6,8 @@ use warnings;
 
 use Fcntl ':flock';
 
+our $VERSION = '0.33'; # VERSION
+
 sub lock {
     my ($class, $path, $opts) = @_;
     $opts //= {};
@@ -97,7 +99,7 @@ SHARYANTO::File::Flock - Yet another flock module
 
 =head1 VERSION
 
-version 0.32
+version 0.33
 
 =head1 SYNOPSIS
 

@@ -6,7 +6,7 @@ use warnings;
 
 use Fcntl ':flock';
 
-our $VERSION = '0.33'; # VERSION
+our $VERSION = '0.34'; # VERSION
 
 sub lock {
     my ($class, $path, $opts) = @_;
@@ -65,7 +65,10 @@ sub _unlock {
     my $path = $self->{path};
 
     return 0 unless $self->{_fh};
-    flock $self->{_fh}, LOCK_UN;
+    {
+        no warnings; # to shut up warning about flock on closed filehandle
+        flock $self->{_fh}, LOCK_UN;
+    }
     close delete($self->{_fh});
     1;
 }
@@ -99,7 +102,7 @@ SHARYANTO::File::Flock - Yet another flock module
 
 =head1 VERSION
 
-version 0.33
+version 0.34
 
 =head1 SYNOPSIS
 

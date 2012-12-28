@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(rename_key);
 
-our $VERSION = '0.33'; # VERSION
+our $VERSION = '0.34'; # VERSION
 
 sub rename_key {
     my ($h, $okey, $nkey) = @_;
@@ -31,7 +31,7 @@ SHARYANTO::Hash::Util - Hash utilities
 
 =head1 VERSION
 
-version 0.33
+version 0.34
 
 =head1 SYNOPSIS
 

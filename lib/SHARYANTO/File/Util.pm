@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(file_exists l_abs_path dir_empty);
 
-our $VERSION = '0.34'; # VERSION
+our $VERSION = '0.35'; # VERSION
 
 our %SPEC;
 
@@ -60,7 +60,7 @@ SHARYANTO::File::Util - File-related utilities
 
 =head1 VERSION
 
-version 0.34
+version 0.35
 
 =head1 SYNOPSIS
 
@@ -95,8 +95,8 @@ This function performs the following test:
 
 =head2 l_abs_path($path) => STR
 
-Just like Cwd::abs_path(), except that it wil follow not follow symlink if $path
-is symlink (but it will follow symlinks for the parent paths).
+Just like Cwd::abs_path(), except that it will not follow symlink if $path is
+symlink (but it will follow symlinks for the parent paths).
 
 Example:
 
@@ -141,7 +141,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

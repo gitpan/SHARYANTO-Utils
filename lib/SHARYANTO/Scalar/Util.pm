@@ -13,7 +13,7 @@ our @EXPORT_OK = qw(
                        looks_like_real
                );
 
-our $VERSION = '0.36'; # VERSION
+our $VERSION = '0.37'; # VERSION
 
 sub looks_like_int {
     my $l = looks_like_number($_[0]);
@@ -48,7 +48,7 @@ SHARYANTO::Scalar::Util - Scalar utilities
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
@@ -109,9 +109,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =cut
 

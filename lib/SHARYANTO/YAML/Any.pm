@@ -31,7 +31,7 @@ SHARYANTO::YAML::Any_SyckOnly - Pick a YAML implementation and use it.
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =for Pod::Coverage .*
 
@@ -47,9 +47,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
 

@@ -142,7 +142,7 @@ SHARYANTO::YAML::Any_YAMLAny
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
@@ -159,9 +159,6 @@ rest is YAML::Any's documentation.
 
 There are several YAML implementations that support the Dump/Load API.
 This module selects the best one available and uses it.
-
-
-This module has L<Rinci> metadata.
 
 =head1 ORDER
 

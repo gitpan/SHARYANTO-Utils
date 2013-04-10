@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(@log_levels $log_levels_re);
 
-our $VERSION = '0.36'; # VERSION
+our $VERSION = '0.37'; # VERSION
 
 our @log_levels = (qw/trace debug info warn error fatal/);
 our $log_levels_re = join("|", @log_levels);
@@ -29,16 +29,13 @@ SHARYANTO::Log::Util - Log-related utilities
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
  use SHARYANTO::Log::Util qw(@log_levels $log_levels_re);
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 VARIABLES
 

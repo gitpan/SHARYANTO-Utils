@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.36'; # VERSION
+our $VERSION = '0.37'; # VERSION
 
 has lang => (
     is => 'rw',
@@ -64,15 +64,12 @@ SHARYANTO::Role::I18N - Role for internationalized class
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 DESCRIPTION
 
 This role is for class that wants to provide localized text, using
 L<Locale::Maketext>. It provides some convention and defaults.
-
-
-This module has L<Rinci> metadata.
 
 =head1 ATTRIBUTES
 

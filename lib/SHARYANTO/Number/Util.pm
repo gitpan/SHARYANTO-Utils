@@ -6,7 +6,7 @@ use strict;
 use utf8;
 use warnings;
 
-our $VERSION = '0.36'; # VERSION
+our $VERSION = '0.37'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -41,12 +41,12 @@ sub format_metric {
     elsif ($rank <= -7) { $prefix = "y" } # yocto
 
     my $prec = $opts->{precision} // 1;
-    $num = sprintf("%.${prec}f", $num /
-                       $base**($rank <= 0 && $num < 1 ? $rank-1 : $rank));
+    $num = $num / $base**($rank <= 0 && $num < 1 ? $rank-1 : $rank);
     if ($opts->{return_array}) {
         return [$num, $prefix];
     } else {
-        return $num . $prefix;
+        my $snum = sprintf("%.${prec}f", $num);
+        return $snum . $prefix;
     }
 }
 
@@ -65,7 +65,7 @@ SHARYANTO::Number::Util - Number utilities
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
@@ -116,9 +116,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =cut
 

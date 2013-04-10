@@ -2,7 +2,7 @@ NAME
     SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 VERSION
-    version 0.36
+    version 0.37
 
 FAQ
   What is this?
@@ -31,8 +31,6 @@ COPYRIGHT AND LICENSE
     the same terms as the Perl 5 programming language system itself.
 
 DESCRIPTION
-    This module has Rinci metadata.
-
 FUNCTIONS
     None are exported by default, but they are exportable.
 

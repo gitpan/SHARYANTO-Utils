@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
                        list_subpackages
                );
 
-our $VERSION = '0.36'; # VERSION
+our $VERSION = '0.37'; # VERSION
 
 sub package_exists {
     no strict 'refs';
@@ -106,7 +106,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
@@ -157,9 +157,6 @@ List subpackages, e.g.:
  )
 
 If $recursive is true, will also list subpackages of subpackages, and so on.
-
-
-This module has L<Rinci> metadata.
 
 =head1 SEE ALSO
 

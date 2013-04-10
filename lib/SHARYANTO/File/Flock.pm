@@ -6,7 +6,7 @@ use warnings;
 
 use Fcntl ':flock';
 
-our $VERSION = '0.36'; # VERSION
+our $VERSION = '0.37'; # VERSION
 
 sub lock {
     my ($class, $path, $opts) = @_;
@@ -104,7 +104,7 @@ SHARYANTO::File::Flock - Yet another flock module
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
@@ -137,9 +137,6 @@ different in the following ways:
 I prefer this approach to blocking/waiting indefinitely.
 
 =back
-
-
-This module has L<Rinci> metadata.
 
 =for Pod::Coverage ^(DESTROY)$
 

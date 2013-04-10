@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(file_exists l_abs_path dir_empty);
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 our %SPEC;
 
@@ -54,13 +54,15 @@ sub dir_empty {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::File::Util - File-related utilities
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 
@@ -71,6 +73,9 @@ version 0.35
  print "dir exists and is empty" if dir_empty("/path/to/dir");
 
 =head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
 
@@ -118,22 +123,15 @@ Note: currently uses hardcoded C</> as path separator.
 
 Will return true if C<$dir> exists and is empty.
 
+
+None are exported by default, but they are exportable.
+
 =head1 FAQ
 
 =head2 Where is file_empty()?
 
 For checking if some path exists, is a regular file, and is empty (content is
 zero-length), you can simply use the C<-z> filetest operator.
-
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
-=head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 

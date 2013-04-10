@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(explain_child_error);
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 sub explain_child_error {
     my ($num, $str);
@@ -36,13 +36,15 @@ sub explain_child_error {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Proc::ChildError - Explain process child error
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 FUNCTIONS
 
@@ -57,13 +59,6 @@ The algorithm is taken from perldoc -f system. Some sample output:
  died with signal 15, with coredump
  exited with value 3
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
-=head1 FUNCTIONS
-
 
 None are exported by default, but they are exportable.
 
@@ -77,6 +72,11 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
 
 =cut
 

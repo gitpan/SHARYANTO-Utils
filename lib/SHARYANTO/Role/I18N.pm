@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 has lang => (
     is => 'rw',
@@ -56,18 +56,23 @@ sub loc {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Role::I18N - Role for internationalized class
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 DESCRIPTION
 
 This role is for class that wants to provide localized text, using
 L<Locale::Maketext>. It provides some convention and defaults.
+
+
+This module has L<Rinci> metadata.
 
 =head1 ATTRIBUTES
 
@@ -90,16 +95,6 @@ C<lh->maketext(...)>.
 
 Shortcut for C<$doc->lh->maketext(@args)>.
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
-=head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
-
 =head1 AUTHOR
 
 Steven Haryanto <stevenharyanto@gmail.com>
@@ -110,6 +105,11 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

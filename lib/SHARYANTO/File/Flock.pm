@@ -6,7 +6,7 @@ use warnings;
 
 use Fcntl ':flock';
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 sub lock {
     my ($class, $path, $opts) = @_;
@@ -96,13 +96,15 @@ sub DESTROY {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::File::Flock - Yet another flock module
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 
@@ -135,6 +137,9 @@ different in the following ways:
 I prefer this approach to blocking/waiting indefinitely.
 
 =back
+
+
+This module has L<Rinci> metadata.
 
 =for Pod::Coverage ^(DESTROY)$
 
@@ -185,16 +190,6 @@ flock() Perl function.
 
 https://github.com/trinitum/perl-File-Flock-Tiny/issues/1
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
-=head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
-
 =head1 AUTHOR
 
 Steven Haryanto <stevenharyanto@gmail.com>
@@ -205,6 +200,11 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

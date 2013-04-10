@@ -20,7 +20,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "SHARYANTO-Utils",
-  "dist_version" => "0.35",
+  "dist_version" => "0.36",
   "license" => "perl",
   "module_name" => "SHARYANTO::Utils",
   "recommends" => {},
@@ -39,7 +39,7 @@ my %module_build_args = (
     "Template::Tiny" => 0,
     "URI::URL" => 0,
     "YAML::Syck" => 0,
-    "perl" => "5.010000"
+    "perl" => "5.010001"
   },
   "script_files" => []
 );

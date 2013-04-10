@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 our %SPEC;
 
@@ -76,21 +76,17 @@ $SPEC{match_regex_or_array}{summary} = 'Alias for match_array_or_regex';
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
-
-=head1 DESCRIPTION
-
-=head1 FUNCTIONS
-
-None are exported by default, but they are exportable.
 
 =head1 DESCRIPTION
 
@@ -98,6 +94,8 @@ None are exported by default, but they are exportable.
 This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
+
+None are exported by default, but they are exportable.
 
 
 None are exported by default, but they are exportable.

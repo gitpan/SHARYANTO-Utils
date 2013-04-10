@@ -11,7 +11,7 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 our %SPEC;
 
@@ -76,24 +76,19 @@ sub extract_image_links {
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 FUNCTIONS
 
 None are exported by default, but they are exportable.
-
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
-=head1 FUNCTIONS
 
 
 None are exported by default, but they are exportable.
@@ -132,6 +127,11 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
 
 =cut
 

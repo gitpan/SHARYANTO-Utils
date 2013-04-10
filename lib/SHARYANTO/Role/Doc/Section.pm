@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.35'; # VERSION
+our $VERSION = '0.36'; # VERSION
 
 has doc_sections => (is=>'rw');
 has doc_lines => (is => 'rw'); # store final result, array
@@ -113,13 +113,15 @@ sub generate_doc {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Role::Doc::Section - Role for class that generates documentation with sections
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 DESCRIPTION
 
@@ -139,6 +141,9 @@ together and returned.
 This module uses L<Log::Any> for logging.
 
 This module uses L<Moo> for object system.
+
+
+This module has L<Rinci> metadata.
 
 =head1 ATTRIBUTES
 
@@ -180,16 +185,6 @@ Character(s) used for indent.
 
 This module is used, among others, by: C<Perinci::To::*> modules.
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
-=head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
-
 =head1 AUTHOR
 
 Steven Haryanto <stevenharyanto@gmail.com>
@@ -200,6 +195,11 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

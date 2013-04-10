@@ -142,7 +142,7 @@ SHARYANTO::YAML::Any_YAMLAny
 
 =head1 VERSION
 
-version 0.37
+version 0.38
 
 =head1 SYNOPSIS
 

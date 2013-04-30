@@ -29,7 +29,7 @@ SHARYANTO::YAML::Any_SyckOnly - Pick a YAML implementation and use it.
 
 =head1 VERSION
 
-version 0.39
+version 0.40
 
 =for Pod::Coverage .*
 

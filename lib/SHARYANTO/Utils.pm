@@ -1,6 +1,6 @@
 package SHARYANTO::Utils;
 
-our $VERSION = '0.38'; # VERSION
+our $VERSION = '0.39'; # VERSION
 
 1;
 # ABSTRACT: SHARYANTO's temporary namespace for various routines
@@ -8,34 +8,21 @@ our $VERSION = '0.38'; # VERSION
 
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 =head1 VERSION
 
-version 0.38
+version 0.39
 
 =head1 FAQ
 
 =head2 What is this?
 
 This distribution is a heterogenous collection of modules that will eventually
-have their own proper distributions, but do not yet because they are not ready
-for some reason or another. For example: alpha quality code, code not yet
-properly refactored, there are still no tests and/or documentation, I haven't
-decided on a proper name yet, etc.
-
-I put it on CPAN because some of my other modules (and scripts) depend on it.
-And I always like to put as much of my code in functions and modules (as opposed
-to scripts) as possible, for better reusability.
-
-You are free to use this, but beware that things might get moved around without
-prior warning.
-
-I assure you that this is not a vanity distribution :-)
+have their own proper distributions. See L<SHARYANTO> about this temporary
+namespace.
 
 =head1 AUTHOR
 
@@ -48,12 +35,7 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =cut
 

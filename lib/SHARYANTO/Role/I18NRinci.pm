@@ -5,7 +5,7 @@ use Log::Any '$log';
 use Moo::Role;
 use Perinci::Object;
 
-our $VERSION = '0.38'; # VERSION
+our $VERSION = '0.39'; # VERSION
 
 with 'SHARYANTO::Role::I18N';
 
@@ -26,15 +26,13 @@ sub langprop {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 SHARYANTO::Role::I18NRinci - Role for class that wants to work with language and Rinci metadata
 
 =head1 VERSION
 
-version 0.38
+version 0.39
 
 =head1 METHODS
 
@@ -51,12 +49,7 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =cut
 

@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(file_exists l_abs_path dir_empty);
 
-our $VERSION = '0.38'; # VERSION
+our $VERSION = '0.39'; # VERSION
 
 our %SPEC;
 
@@ -54,15 +54,13 @@ sub dir_empty {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 SHARYANTO::File::Util - File-related utilities
 
 =head1 VERSION
 
-version 0.38
+version 0.39
 
 =head1 SYNOPSIS
 
@@ -119,9 +117,6 @@ Note: currently uses hardcoded C</> as path separator.
 =head2 dir_empty($dir) => BOOL
 
 Will return true if C<$dir> exists and is empty.
-
-
-None are exported by default, but they are exportable.
 
 =head1 FAQ
 

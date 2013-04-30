@@ -10,7 +10,7 @@ my %module_build_args = (
     "File::chdir" => 0,
     "Module::Build" => "0.3601",
     "Test::Exception" => 0,
-    "Test::More" => "0.96"
+    "Test::More" => "0.98"
   },
   "configure_requires" => {
     "Module::Build" => "0.3601"
@@ -20,7 +20,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "SHARYANTO-Utils",
-  "dist_version" => "0.38",
+  "dist_version" => "0.39",
   "license" => "perl",
   "module_name" => "SHARYANTO::Utils",
   "recommends" => {},

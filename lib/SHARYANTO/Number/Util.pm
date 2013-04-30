@@ -6,7 +6,7 @@ use strict;
 use utf8;
 use warnings;
 
-our $VERSION = '0.38'; # VERSION
+our $VERSION = '0.39'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -64,15 +64,13 @@ sub format_metric {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 SHARYANTO::Number::Util - Number utilities
 
 =head1 VERSION
 
-version 0.38
+version 0.39
 
 =head1 SYNOPSIS
 
@@ -101,9 +99,6 @@ Give "i" suffix to prefixes when in base 10 for K, M, G, T, and so on.
 
 =back
 
-
-None are exported by default, but they are exportable.
-
 =head1 SEE ALSO
 
 Number formatting routines: L<Number::Format>, L<Format::Human::Bytes>,
@@ -121,8 +116,6 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
-=head1 DESCRIPTION
 
 =cut
 

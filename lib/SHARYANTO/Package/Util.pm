@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
                        list_subpackages
                );
 
-our $VERSION = '0.38'; # VERSION
+our $VERSION = '0.39'; # VERSION
 
 sub package_exists {
     no strict 'refs';
@@ -98,15 +98,13 @@ sub list_subpackages {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.38
+version 0.39
 
 =head1 SYNOPSIS
 
@@ -174,9 +172,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =cut
 

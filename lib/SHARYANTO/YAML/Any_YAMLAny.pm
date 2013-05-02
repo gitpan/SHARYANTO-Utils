@@ -134,13 +134,15 @@ sub croak {
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::YAML::Any_YAMLAny
 
 =head1 VERSION
 
-version 0.40
+version 0.41
 
 =head1 SYNOPSIS
 
@@ -238,6 +240,9 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

@@ -8,6 +8,8 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(get_parent_processes);
 
+our $VERSION = '0.44'; # VERSION
+
 sub get_parent_processes {
     my ($pid) = @_;
     $pid //= $$;
@@ -44,6 +46,7 @@ sub get_parent_processes {
         $cur_pid = $proc{$cur_pid}{ppid};
         last unless $cur_pid;
     }
+    shift @p; # delete cur process
 
     \@p;
 }
@@ -60,7 +63,7 @@ SHARYANTO::Proc::Util - OS-process-related routines
 
 =head1 VERSION
 
-version 0.43
+version 0.44
 
 =head1 SYNOPSIS
 

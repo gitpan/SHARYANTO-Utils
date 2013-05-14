@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(@log_levels $log_levels_re);
 
-our $VERSION = '0.42'; # VERSION
+our $VERSION = '0.43'; # VERSION
 
 our @log_levels = (qw/trace debug info warn error fatal/);
 our $log_levels_re = join("|", @log_levels);
@@ -21,15 +21,13 @@ $log_levels_re = qr/\A(?:$log_levels_re)\z/;
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 SHARYANTO::Log::Util - Log-related utilities
 
 =head1 VERSION
 
-version 0.42
+version 0.43
 
 =head1 SYNOPSIS
 
@@ -69,9 +67,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =cut
 

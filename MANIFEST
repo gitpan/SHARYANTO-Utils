@@ -19,6 +19,7 @@ lib/SHARYANTO/Number/Util.pm
 lib/SHARYANTO/Package/Util.pm
 lib/SHARYANTO/Proc/ChildError.pm
 lib/SHARYANTO/Proc/Daemon/Prefork.pm
+lib/SHARYANTO/Proc/Util.pm
 lib/SHARYANTO/Role/Doc/Section.pm
 lib/SHARYANTO/Role/I18N.pm
 lib/SHARYANTO/Role/I18NMany.pm

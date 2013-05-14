@@ -2,7 +2,7 @@ NAME
     SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 VERSION
-    version 0.42
+    version 0.43
 
 FAQ
   What is this?
@@ -19,7 +19,4 @@ COPYRIGHT AND LICENSE
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
 
-DESCRIPTION
 FUNCTIONS
-    None are exported by default, but they are exportable.
-

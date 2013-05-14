@@ -11,6 +11,7 @@ lib/SHARYANTO/Array/Util.pm
 lib/SHARYANTO/Color/Util.pm
 lib/SHARYANTO/File/Flock.pm
 lib/SHARYANTO/File/Util.pm
+lib/SHARYANTO/Getopt/Long/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
 lib/SHARYANTO/Hash/Util.pm
@@ -36,6 +37,7 @@ t/array_util.t
 t/color_util.t
 t/detect_http_ua_simple.t
 t/file_util.t
+t/getopt_long_util.t
 t/hash_util.t
 t/log_util.t
 t/number_util.t

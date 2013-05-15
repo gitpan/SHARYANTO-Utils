@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.45'; # VERSION
+our $VERSION = '0.46'; # VERSION
 
 has lang => (
     is => 'rw',
@@ -48,6 +48,17 @@ sub loc {
     $self->lh->maketext(@args);
 }
 
+sub locopt {
+    my ($self, @args) = @_;
+    my $res = eval {
+        $self->lh->maketext(@args);
+    };
+    if ($@) {
+        return $args[0];
+    } else {
+        return $res;
+    }
+}
 
 1;
 # ABSTRACT: Role for internationalized class
@@ -56,13 +67,15 @@ sub loc {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Role::I18N - Role for internationalized class
 
 =head1 VERSION
 
-version 0.45
+version 0.46
 
 =head1 DESCRIPTION
 
@@ -82,13 +95,18 @@ Project class. Defaults to $class::I18N.
 =head2 lh
 
 The language handle, where you ask for localized text using
-C<lh->maketext(...)>.
+C<< lh->maketext(...) >>.
 
 =head1 METHODS
 
 =head2 $doc->loc(@args) => STR
 
-Shortcut for C<$doc->lh->maketext(@args)>.
+Shortcut for C<< $doc->lh->maketext(@args) >>.
+
+=head2 $doc->locopt(@args) => STR
+
+Like loc(), but will trap missing translation. So instead of dying, it will
+return $args[0] instead.
 
 =head1 AUTHOR
 
@@ -102,6 +120,9 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

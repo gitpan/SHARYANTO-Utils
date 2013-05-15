@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.45'; # VERSION
+our $VERSION = '0.46'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -47,13 +47,15 @@ sub gospec2human {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Getopt::Long::Util
 
 =head1 VERSION
 
-version 0.45
+version 0.46
 
 =head1 FUNCTIONS
 
@@ -62,6 +64,9 @@ version 0.45
 Change something like 'help|h|?' or 'foo=s' or 'debug!' into, respectively,
 '--help, -h, -?' or '--foo=s' or '--(no)debug'. The output is suitable for
 including in help/usage text.
+
+
+None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 
@@ -73,6 +78,8 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 DESCRIPTION
 
 =cut
 

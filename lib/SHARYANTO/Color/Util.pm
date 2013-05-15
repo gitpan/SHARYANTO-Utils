@@ -14,7 +14,7 @@ our @EXPORT_OK = qw(
                        rgb2sepia
                );
 
-our $VERSION = '0.45'; # VERSION
+our $VERSION = '0.46'; # VERSION
 
 sub mix_2_rgb_colors {
     my ($rgb1, $rgb2, $pct) = @_;
@@ -114,13 +114,15 @@ sub reverse_rgb_color {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Color::Util - Color-related utilities
 
 =head1 VERSION
 
-version 0.45
+version 0.46
 
 =head1 SYNOPSIS
 
@@ -171,6 +173,9 @@ Convert C<$rgb> to sepia tone RGB value.
 =head2 reverse_rgb_color($rgb) => RGB
 
 Reverse C<$rgb>.
+
+
+None are exported by default, but they are exportable.
 
 =head1 TODO
 

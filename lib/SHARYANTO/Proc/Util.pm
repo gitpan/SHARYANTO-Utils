@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(get_parent_processes);
 
-our $VERSION = '0.45'; # VERSION
+our $VERSION = '0.46'; # VERSION
 
 sub get_parent_processes {
     my ($pid) = @_;
@@ -57,13 +57,15 @@ sub get_parent_processes {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 SHARYANTO::Proc::Util - OS-process-related routines
 
 =head1 VERSION
 
-version 0.45
+version 0.46
 
 =head1 SYNOPSIS
 
@@ -83,6 +85,9 @@ followed by its parent, and so on. For example:
 Currently retrieves information by calling B<pstree> program. Return undef on
 failure.
 
+
+None are exported by default, but they are exportable.
+
 =head1 SEE ALSO
 
 L<Proc::ProcessTable>. Pros: does not depend on pstree command, process names
@@ -99,6 +104,8 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 DESCRIPTION
 
 =cut
 

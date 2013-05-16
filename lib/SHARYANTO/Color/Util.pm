@@ -4,6 +4,8 @@ use 5.010;
 use strict;
 use warnings;
 
+#use List::Util qw(min);
+
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(
@@ -12,9 +14,11 @@ our @EXPORT_OK = qw(
                        reverse_rgb_color
                        rgb2grayscale
                        rgb2sepia
+                       rgb_luminance
+                       tint_rgb_color
                );
 
-our $VERSION = '0.46'; # VERSION
+our $VERSION = '0.47'; # VERSION
 
 sub mix_2_rgb_colors {
     my ($rgb1, $rgb2, $pct) = @_;
@@ -77,7 +81,6 @@ sub rgb2grayscale {
 }
 
 sub rgb2sepia {
-
     my ($rgb) = @_;
 
     $rgb =~ /^#?([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$/o
@@ -95,7 +98,6 @@ sub rgb2sepia {
 }
 
 sub reverse_rgb_color {
-
     my ($rgb) = @_;
 
     $rgb =~ /^#?([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$/o
@@ -105,6 +107,48 @@ sub reverse_rgb_color {
     my $b = hex($3);
 
     return sprintf("%02x%02x%02x", 255-$r, 255-$g, 255-$b);
+}
+
+sub _rgb_luminance {
+    my ($r, $g, $b) = @_;
+    0.2126*$r/255 + 0.7152*$g/255 + 0.0722*$b/255;
+}
+
+sub rgb_luminance {
+    my ($rgb) = @_;
+
+    $rgb =~ /^#?([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$/o
+        or die "Invalid rgb color, must be in 'ffffff' form";
+    my $r = hex($1);
+    my $g = hex($2);
+    my $b = hex($3);
+
+    return _rgb_luminance($r, $g, $b);
+}
+
+sub tint_rgb_color {
+    my ($rgb1, $rgb2, $pct) = @_;
+
+    $pct //= 0.5;
+
+    $rgb1 =~ /^#?([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$/o
+        or die "Invalid rgb color, must be in 'ffffff' form";
+    my $r1 = hex($1);
+    my $g1 = hex($2);
+    my $b1 = hex($3);
+    $rgb2 =~ /^#?([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$/o
+        or die "Invalid tint color, must be in 'ffffff' form";
+    my $r2 = hex($1);
+    my $g2 = hex($2);
+    my $b2 = hex($3);
+
+    my $lum = _rgb_luminance($r1, $g1, $b1);
+
+    return sprintf("%02x%02x%02x",
+                   $r1 + $pct*($r2-$r1)*$lum,
+                   $g1 + $pct*($g2-$g1)*$lum,
+                   $b1 + $pct*($b2-$b1)*$lum,
+               );
 }
 
 1;
@@ -122,7 +166,7 @@ SHARYANTO::Color::Util - Color-related utilities
 
 =head1 VERSION
 
-version 0.46
+version 0.47
 
 =head1 SYNOPSIS
 
@@ -132,6 +176,7 @@ version 0.46
      rgb2grayscale
      rgb2sepia
      reverse_rgb_color
+     rgb_luminance
  );
 
  say mix_2_rgb_colors('#ff0000', '#ffffff');     # pink (red + white)
@@ -145,6 +190,8 @@ version 0.46
  say rgb2sepia('0033CC');                        # => 4d4535
 
  say reverse_rgb_color('0033CC');                # => ffcc33
+
+ say rgb_luminance('d090aa');                    # => ffcc33
 
 =head1 DESCRIPTION
 
@@ -173,6 +220,20 @@ Convert C<$rgb> to sepia tone RGB value.
 =head2 reverse_rgb_color($rgb) => RGB
 
 Reverse C<$rgb>.
+
+=head2 rgb_luminance($rgb) => NUM
+
+Calculate standard/objective luminance from RGB value using this formula:
+
+ (0.2126*R) + (0.7152*G) + (0.0722*B)
+
+where R, G, and B range from 0 to 1. Return a number from 0 to 1.
+
+=head2 tint_rgb_color($rgb, $tint_rgb, $pct) => RGB
+
+Tint C<$rgb> with C<$tint_rgb>. $pct is by default 0.5. It is similar to mixing,
+but the less luminance the color is the less it is tinted with the tint color.
+This has the effect of black color still being black instead of becoming tinted.
 
 
 None are exported by default, but they are exportable.

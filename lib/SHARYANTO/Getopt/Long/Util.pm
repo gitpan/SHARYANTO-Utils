@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.46'; # VERSION
+our $VERSION = '0.47'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -41,7 +41,7 @@ sub gospec2human {
     $res;
 }
 
-# ASBTRACT: Utilities for Getopt::Long
+#ABSTRACT: Utilities for Getopt::Long
 
 
 __END__
@@ -51,11 +51,11 @@ __END__
 
 =head1 NAME
 
-SHARYANTO::Getopt::Long::Util
+SHARYANTO::Getopt::Long::Util - Utilities for Getopt::Long
 
 =head1 VERSION
 
-version 0.46
+version 0.47
 
 =head1 FUNCTIONS
 

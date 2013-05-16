@@ -9,7 +9,7 @@ use File::Find;
 use File::Slurp;
 use Template::Tiny;
 
-our $VERSION = '0.46'; # VERSION
+our $VERSION = '0.47'; # VERSION
 
 # recursively find *.tt and process them. can optionally delete the *.tt files
 # after processing.
@@ -46,7 +46,7 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-version 0.46
+version 0.47
 
 =head1 FUNCTIONS
 

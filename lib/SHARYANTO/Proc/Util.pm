@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(get_parent_processes);
 
-our $VERSION = '0.47'; # VERSION
+our $VERSION = '0.48'; # VERSION
 
 sub get_parent_processes {
     my ($pid) = @_;
@@ -65,7 +65,7 @@ SHARYANTO::Proc::Util - OS-process-related routines
 
 =head1 VERSION
 
-version 0.47
+version 0.48
 
 =head1 SYNOPSIS
 

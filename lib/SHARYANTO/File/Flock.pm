@@ -6,7 +6,7 @@ use warnings;
 
 use Fcntl ':flock';
 
-our $VERSION = '0.47'; # VERSION
+our $VERSION = '0.48'; # VERSION
 
 sub lock {
     my ($class, $path, $opts) = @_;
@@ -36,18 +36,32 @@ sub _lock {
   TRY:
     while (1) {
         $tries++;
+
+        # 1
         open $self->{_fh}, ">>", $path
             or die "Can't open lock file '$path': $!";
+
+        # 2
         my @st1 = stat($self->{_fh}); # stat before lock
+
+        # 3
         if (flock($self->{_fh}, LOCK_EX | LOCK_NB)) {
-            # we need to check again after flock() to make sure that no other
-            # process comes between open() and flock() and unlink/recreate the
-            # lock file under us. if that happens, we need to try again. to make
-            # sure that the lock file is the same file, we compare dev+inode.
+            # if file is unlinked by another process between 1 & 2, @st1 will be
+            # empty and we check here.
+            redo TRY unless @st1;
+
+            # 4
             my @st2 = stat($path); # stat after lock
-            redo TRY
-                if @st1 && @st2 && # should always be the case under normal cond
-                    ($st1[0] != $st2[0] || $st1[1] != $st2[1]);
+
+            # if file is unlinked between 3 & 4, @st2 will be empty and we check
+            # here.
+            redo TRY unless @st2;
+
+            # if file is recreated between 2 & 4, @st1 and @st2 will differ in
+            # dev/inode, we check here.
+            redo TRY if $st1[0] != $st2[0] || $st1[1] != $st2[1];
+
+            # everything seems okay
             last;
         } else {
             $tries <= $self->{retries}
@@ -85,7 +99,7 @@ sub unlock {
 
 sub DESTROY {
     my $self = shift;
-    unlink $self->{path} if $self->{unlink};
+    unlink $self->{path} if $self->{_fh} && $self->{unlink};
     $self->_unlock;
 }
 
@@ -104,7 +118,7 @@ SHARYANTO::File::Flock - Yet another flock module
 
 =head1 VERSION
 
-version 0.47
+version 0.48
 
 =head1 SYNOPSIS
 
@@ -172,6 +186,11 @@ Unlock.
 =head2 $lock->release
 
 Synonym for unlock().
+
+=head2 DESTROY
+
+When C<unlink> option is set to true, will unlink lock file during object
+destruction. Will only do so if current process holds the lock.
 
 =head1 CAVEATS
 

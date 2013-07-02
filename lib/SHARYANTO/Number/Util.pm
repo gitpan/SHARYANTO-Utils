@@ -6,7 +6,7 @@ use strict;
 use utf8;
 use warnings;
 
-our $VERSION = '0.47'; # VERSION
+our $VERSION = '0.48'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -72,7 +72,7 @@ SHARYANTO::Number::Util - Number utilities
 
 =head1 VERSION
 
-version 0.47
+version 0.48
 
 =head1 SYNOPSIS
 

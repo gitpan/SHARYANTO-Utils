@@ -36,6 +36,7 @@ t/00-compile.t
 t/array_util.t
 t/color_util.t
 t/detect_http_ua_simple.t
+t/file_flock.t
 t/file_util.t
 t/getopt_long_util.t
 t/hash_util.t

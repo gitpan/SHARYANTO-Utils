@@ -47,6 +47,7 @@
             "Template::Tiny" : "0",
             "URI::URL" : "0",
             "YAML::Syck" : "0",
+            "experimental" : "0",
             "perl" : "5.010001"
          }
       },
@@ -65,6 +66,6 @@
          "url" : "http://github.com/sharyanto/perl-SHARYANTO-Utils"
       }
    },
-   "version" : "0.47"
+   "version" : "0.48"
 }
 

@@ -13,7 +13,7 @@ our @EXPORT_OK = qw(
                        looks_like_real
                );
 
-our $VERSION = '0.49'; # VERSION
+our $VERSION = '0.50'; # VERSION
 
 sub looks_like_int {
     my $l = looks_like_number($_[0]);
@@ -48,7 +48,7 @@ SHARYANTO::Scalar::Util - Scalar utilities
 
 =head1 VERSION
 
-version 0.49
+version 0.50
 
 =head1 SYNOPSIS
 

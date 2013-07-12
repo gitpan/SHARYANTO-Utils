@@ -3,13 +3,14 @@ package SHARYANTO::Array::Util;
 use 5.010;
 use strict;
 use warnings;
+use experimental 'smartmatch';
 use Data::Clone;
 
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.50'; # VERSION
+our $VERSION = '0.51'; # VERSION
 
 our %SPEC;
 
@@ -84,7 +85,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.50
+version 0.51
 
 =head1 SYNOPSIS
 

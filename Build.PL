@@ -20,13 +20,14 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "SHARYANTO-Utils",
-  "dist_version" => "0.50",
+  "dist_version" => "0.51",
   "license" => "perl",
   "module_name" => "SHARYANTO::Utils",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Data::Clone" => 0,
+    "Data::Structure::Util" => 0,
     "File::Slurp" => 0,
     "File::Which" => 0,
     "HTML::Parser" => 0,

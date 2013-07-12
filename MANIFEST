@@ -9,6 +9,8 @@ README
 dist.ini
 lib/SHARYANTO/Array/Util.pm
 lib/SHARYANTO/Color/Util.pm
+lib/SHARYANTO/Data/OldUtil.pm
+lib/SHARYANTO/Data/Util.pm
 lib/SHARYANTO/File/Flock.pm
 lib/SHARYANTO/File/Util.pm
 lib/SHARYANTO/Getopt/Long/Util.pm
@@ -35,6 +37,8 @@ lib/SHARYANTO/YAML/Any_YAMLAny.pm
 t/00-compile.t
 t/array_util.t
 t/color_util.t
+t/data_oldutil.t
+t/data_util.t
 t/detect_http_ua_simple.t
 t/file_flock.t
 t/file_util.t

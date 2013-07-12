@@ -18,6 +18,7 @@ meta-spec:
 name: SHARYANTO-Utils
 requires:
   Data::Clone: 0
+  Data::Structure::Util: 0
   File::Slurp: 0
   File::Which: 0
   HTML::Parser: 0
@@ -35,4 +36,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.50
+version: 0.51

@@ -24,6 +24,7 @@ lib/SHARYANTO/Proc/ChildError.pm
 lib/SHARYANTO/Proc/Daemon/Prefork.pm
 lib/SHARYANTO/Proc/Util.pm
 lib/SHARYANTO/Role/Doc/Section.pm
+lib/SHARYANTO/Role/Doc/Section/AddTextLines.pm
 lib/SHARYANTO/Role/I18N.pm
 lib/SHARYANTO/Role/I18NMany.pm
 lib/SHARYANTO/Role/I18NRinci.pm

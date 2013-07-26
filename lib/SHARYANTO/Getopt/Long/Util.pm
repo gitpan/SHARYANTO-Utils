@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -43,8 +43,8 @@ sub gospec2human {
 
 #ABSTRACT: Utilities for Getopt::Long
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -55,7 +55,7 @@ SHARYANTO::Getopt::Long::Util - Utilities for Getopt::Long
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 FUNCTIONS
 
@@ -82,4 +82,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-

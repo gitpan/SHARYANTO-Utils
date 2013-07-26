@@ -1,10 +1,11 @@
 package SHARYANTO::Utils;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 1;
 # ABSTRACT: SHARYANTO's temporary namespace for various routines
 
+__END__
 
 =pod
 
@@ -16,7 +17,7 @@ SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 FAQ
 
@@ -45,7 +46,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-
-
-__END__
-

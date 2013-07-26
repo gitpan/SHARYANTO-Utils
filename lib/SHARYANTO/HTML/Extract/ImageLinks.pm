@@ -11,7 +11,7 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 our %SPEC;
 
@@ -73,6 +73,7 @@ sub extract_image_links {
 1;
 # ABSTRACT: Extract image links from HTML document
 
+__END__
 
 =pod
 
@@ -84,7 +85,7 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 FUNCTIONS
 
@@ -93,25 +94,9 @@ None are exported by default, but they are exportable.
 
 None are exported by default, but they are exportable.
 
-=head2 extract_image_links(%args) -> [status, msg, result, meta]
+=head2 extract_image_links() -> [status, msg, result, meta]
 
-Extract image links from HTML document.
-
-Either specify either url, html.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<base> => I<str>
-
-base URL for images.
-
-=item * B<html>* => I<str>
-
-HTML document to extract from.
-
-=back
+No arguments.
 
 Return value:
 
@@ -131,7 +116,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-
-
-__END__
-

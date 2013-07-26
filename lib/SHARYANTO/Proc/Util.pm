@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(get_parent_processes);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 sub get_parent_processes {
     my ($pid) = @_;
@@ -53,8 +53,8 @@ sub get_parent_processes {
 
 # ABSTRACT: OS-process-related routines
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -65,7 +65,7 @@ SHARYANTO::Proc::Util - OS-process-related routines
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -108,4 +108,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-

@@ -18,7 +18,7 @@ our @EXPORT_OK = qw(
                        tint_rgb_color
                );
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 sub mix_2_rgb_colors {
     my ($rgb1, $rgb2, $pct) = @_;
@@ -154,8 +154,8 @@ sub tint_rgb_color {
 1;
 # ABSTRACT: Color-related utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -166,7 +166,7 @@ SHARYANTO::Color::Util - Color-related utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -255,4 +255,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

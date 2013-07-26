@@ -8,7 +8,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(prompt);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 sub prompt {
     my ($text, $opts) = @_;
@@ -56,9 +56,8 @@ sub prompt {
 1;
 # ABSTRACT: Prompt user question
 
-
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -69,7 +68,7 @@ SHARYANTO::Text::Prompt - Prompt user question
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 FUNCTIONS
 
@@ -106,4 +105,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-

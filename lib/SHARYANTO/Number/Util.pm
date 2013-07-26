@@ -6,7 +6,7 @@ use strict;
 use utf8;
 use warnings;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -60,8 +60,8 @@ sub format_metric {
 1;
 # ABSTRACT: Number utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -72,7 +72,7 @@ SHARYANTO::Number::Util - Number utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -125,4 +125,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-

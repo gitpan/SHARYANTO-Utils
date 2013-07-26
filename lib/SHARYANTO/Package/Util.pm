@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
                        list_subpackages
                );
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 sub package_exists {
     no strict 'refs';
@@ -94,8 +94,8 @@ sub list_subpackages {
 1;
 # ABSTRACT: Package-related utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -106,7 +106,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -179,4 +179,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

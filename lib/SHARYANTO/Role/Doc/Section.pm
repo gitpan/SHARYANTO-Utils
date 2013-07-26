@@ -4,15 +4,13 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 has doc_sections => (is=>'rw');
 has doc_lines => (is => 'rw'); # store final result, array
 has doc_parse => (is => 'rw'); # store parsed items, hash
 has indent_level => (is => 'rw');
 has indent => (is => 'rw', default => sub{"  "}); # indent character
-
-requires 'add_doc_lines';
 
 sub add_doc_section_before {
     my ($self, $name, $before) = @_;
@@ -77,10 +75,6 @@ sub dec_indent {
     die "BUG: Negative indent level" unless $self->{indent_level} >=0;
 }
 
-sub before_generate_doc {}
-
-sub after_generate_doc {}
-
 sub generate_doc {
     my ($self, %opts) = @_;
     $log->tracef("-> generate_doc(opts=%s)", \%opts);
@@ -89,7 +83,7 @@ sub generate_doc {
     $self->indent_level(0);
     $self->doc_parse({});
 
-    $self->before_generate_doc(%opts);
+    $self->before_generate_doc(%opts) if $self->can("before_generate_doc");
 
     for my $s (@{ $self->doc_sections // [] }) {
         my $meth = "doc_parse_$s";
@@ -100,7 +94,7 @@ sub generate_doc {
         $self->$meth(%opts);
     }
 
-    $self->after_generate_doc(%opts);
+    $self->after_generate_doc(%opts) if $self->can("after_generate_doc");
 
     $log->tracef("<- generate_doc()");
     join("", @{ $self->doc_lines });
@@ -109,8 +103,8 @@ sub generate_doc {
 1;
 #ABSTRACT: Role for class that generates documentation with sections
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -121,7 +115,7 @@ SHARYANTO::Role::Doc::Section - Role for class that generates documentation with
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 DESCRIPTION
 
@@ -134,8 +128,8 @@ C<doc_sections>. Then you run C<generate_doc()>, which will call
 C<doc_parse_SECTION> and C<doc_gen_SECTION> methods for each section
 consecutively. C<doc_parse_*> is supposed to parse information from some source
 into a form readily usable in $self->doc_parse hash. C<doc_gen_*> is supposed to
-generate the actual section in the final documentation format, by calling
-C<add_doc_lines> to add text. Finally all the added lines is concatenated
+generate the actual section in the final documentation format, by appending
+lines of text to C<doc_lines>. Finally all the added lines is concatenated
 together and returned.
 
 This module uses L<Log::Any> for logging.
@@ -146,9 +140,13 @@ This module uses L<Moo> for object system.
 
 =head2 doc_sections => ARRAY
 
-=head2 doc_sections => ARRAY
+Should be set to the names of available sections.
+
+=head2 doc_lines => ARRAY
 
 =head2 doc_parse => HASH
+
+Store parse information.
 
 =head2 indent_level => INT
 
@@ -162,15 +160,7 @@ Character(s) used for indent.
 
 =head2 add_doc_section_after($name, $anchor)
 
-=head2 after_generate_doc()
-
-=head2 before_generate_doc()
-
 =head2 delete_doc_section($name)
-
-=head2 doc_lines()
-
-=head2 add_doc_lines(@lines)
 
 =head2 inc_indent([N])
 
@@ -178,9 +168,29 @@ Character(s) used for indent.
 
 =head2 generate_doc() => STR
 
+Generate documentation.
+
+The method will first initialize C<doc_lines> to an empty array C<[]>,
+C<doc_parse> to empty hash C<{}>, and C<indent_level> to 0.
+
+It will then call C<before_generate_doc> if the hook method exists, to allow
+class to do stuffs prior to document generation. L<Perinci::To::Text> uses this,
+for example, to retrieve metadata from Riap server.
+
+Then, as described in L</"DESCRIPTION">, for each section listed in
+C<doc_sections> it will call C<doc_parse_SECTION> and C<doc_gen_SECTION>.
+
+After that, it will call C<after_generate_doc> if the hook method exists, to
+allow class to do stuffs after document generation.
+
+Lastly, it returns concatenated C<doc_lines>.
+
 =head1 SEE ALSO
 
 This module is used, among others, by: C<Perinci::To::*> modules.
+
+L<SHARYANTO::Role::Doc::Section::AddTextLines> which provides C<add_doc_lines>
+to add text with optional text wrapping.
 
 =head1 AUTHOR
 
@@ -199,4 +209,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

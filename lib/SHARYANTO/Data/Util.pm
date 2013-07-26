@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(clone_circular_refs);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 our %SPEC;
 
@@ -90,8 +90,8 @@ sub clone_circular_refs {
 1;
 # ABSTRACT: Data utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -102,7 +102,7 @@ SHARYANTO::Data::Util - Data utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -115,40 +115,9 @@ None are exported by default, but they are exportable.
 
 None are exported by default, but they are exportable.
 
-=head2 clone_circular_refs(@args) -> any
+=head2 clone_circular_refs() -> any
 
-Remove circular references by deep-copying them.
-
-For example, this data:
-
-    $x = [1];
-    $data = [$x, 2, $x];
-
-contains circular references by referring to C<$x> twice. After
-C<clone_circular_refs>, data will become:
-
-    $data = [$x, 2, [1]];
-
-that is, the subsequent circular references will be deep-copied. This makes it
-safe to transport to JSON, for example.
-
-Sometimes it doesn't work, for example:
-
-    $data = [1];
-    push @$data, $data;
-
-Cloning will still create circular references.
-
-This function modifies the data structure in-place, and return true for success
-and false upon failure.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<data>* => I<any>
-
-=back
+No arguments.
 
 Return value:
 
@@ -169,4 +138,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

@@ -13,7 +13,7 @@ our @EXPORT_OK = qw(
                        looks_like_real
                );
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 sub looks_like_int {
     my $l = looks_like_number($_[0]);
@@ -36,8 +36,8 @@ sub looks_like_real {
 1;
 # ABSTRACT: Scalar utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -48,7 +48,7 @@ SHARYANTO::Scalar::Util - Scalar utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -111,4 +111,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-

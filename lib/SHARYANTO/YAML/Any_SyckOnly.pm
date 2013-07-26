@@ -20,6 +20,7 @@ $YAML::Syck::ImplicitTyping = 1;
 1;
 # ABSTRACT: Pick a YAML implementation and use it.
 
+__END__
 
 =pod
 
@@ -31,7 +32,7 @@ SHARYANTO::YAML::Any_SyckOnly - Pick a YAML implementation and use it.
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =for Pod::Coverage .*
 
@@ -54,7 +55,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-
-
-__END__
-

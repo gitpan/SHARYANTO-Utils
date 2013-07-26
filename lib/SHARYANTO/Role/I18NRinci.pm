@@ -5,7 +5,7 @@ use Log::Any '$log';
 use Moo::Role;
 use Perinci::Object;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 with 'SHARYANTO::Role::I18N';
 
@@ -22,8 +22,8 @@ sub langprop {
 1;
 # ABSTRACT: Role for class that wants to work with language and Rinci metadata
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -34,7 +34,7 @@ SHARYANTO::Role::I18NRinci - Role for class that wants to work with language and
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 METHODS
 
@@ -59,4 +59,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

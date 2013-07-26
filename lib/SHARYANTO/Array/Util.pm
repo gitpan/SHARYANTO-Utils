@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 our %SPEC;
 
@@ -73,8 +73,8 @@ $SPEC{match_regex_or_array}{summary} = 'Alias for match_array_or_regex';
 1;
 # ABSTRACT: Array-related utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -85,7 +85,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -98,41 +98,15 @@ None are exported by default, but they are exportable.
 
 None are exported by default, but they are exportable.
 
-=head2 match_array_or_regex(@args) -> any
+=head2 match_array_or_regex() -> any
 
-Check whether an item matches (list of) values/regexes.
-
-This routine can be used to match an item against a regex or a list of
-strings/regexes, e.g. when matching against an ACL.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<haystack>* => I<any>
-
-=item * B<needle>* => I<str>
-
-=back
+No arguments.
 
 Return value:
 
-=head2 match_regex_or_array(@args) -> any
+=head2 match_regex_or_array() -> any
 
-Alias for match_array_or_regex.
-
-This routine can be used to match an item against a regex or a list of
-strings/regexes, e.g. when matching against an ACL.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<haystack>* => I<any>
-
-=item * B<needle>* => I<str>
-
-=back
+No arguments.
 
 Return value:
 
@@ -148,4 +122,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

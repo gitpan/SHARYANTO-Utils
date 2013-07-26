@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(has_circular_ref);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 our %SPEC;
 
@@ -59,8 +59,8 @@ sub has_circular_ref {
 1;
 # ABSTRACT: Data utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -71,7 +71,7 @@ SHARYANTO::Data::OldUtil - Data utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -84,19 +84,9 @@ None are exported by default, but they are exportable.
 
 None are exported by default, but they are exportable.
 
-=head2 has_circular_ref(@args) -> any
+=head2 has_circular_ref() -> any
 
-Check whether data item contains circular references.
-
-Does not deal with weak references.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<data>* => I<any>
-
-=back
+No arguments.
 
 Return value:
 
@@ -120,4 +110,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

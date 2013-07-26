@@ -11,7 +11,7 @@ use IO::Select;
 use POSIX;
 use Symbol;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 # --- globals
 
@@ -616,9 +616,8 @@ sub check_reload_self {
 1;
 # ABSTRACT: Create preforking, autoreloading daemon
 
-
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -629,7 +628,7 @@ SHARYANTO::Proc::Daemon::Prefork - Create preforking, autoreloading daemon
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =for Pod::Coverage .*
 
@@ -740,4 +739,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

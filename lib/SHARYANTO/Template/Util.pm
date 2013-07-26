@@ -9,7 +9,7 @@ use File::Find;
 use File::Slurp;
 use Template::Tiny;
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 # recursively find *.tt and process them. can optionally delete the *.tt files
 # after processing.
@@ -34,8 +34,8 @@ sub process_tt_recursive {
 1;
 # ABSTRACT: Recursively process .tt files
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -46,7 +46,7 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 FUNCTIONS
 
@@ -69,4 +69,3 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DESCRIPTION
 
 =cut
-

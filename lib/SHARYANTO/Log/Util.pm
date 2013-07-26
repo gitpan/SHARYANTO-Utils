@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(@log_levels $log_levels_re);
 
-our $VERSION = '0.51'; # VERSION
+our $VERSION = '0.52'; # VERSION
 
 our @log_levels = (qw/trace debug info warn error fatal/);
 our $log_levels_re = join("|", @log_levels);
@@ -17,8 +17,8 @@ $log_levels_re = qr/\A(?:$log_levels_re)\z/;
 1;
 # ABSTRACT: Log-related utilities
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -29,7 +29,7 @@ SHARYANTO::Log::Util - Log-related utilities
 
 =head1 VERSION
 
-version 0.51
+version 0.52
 
 =head1 SYNOPSIS
 
@@ -74,4 +74,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

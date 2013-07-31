@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(clone_circular_refs);
 
-our $VERSION = '0.52'; # VERSION
+our $VERSION = '0.53'; # VERSION
 
 our %SPEC;
 
@@ -102,7 +102,7 @@ SHARYANTO::Data::Util - Data utilities
 
 =head1 VERSION
 
-version 0.52
+version 0.53
 
 =head1 SYNOPSIS
 
@@ -115,9 +115,38 @@ None are exported by default, but they are exportable.
 
 None are exported by default, but they are exportable.
 
-=head2 clone_circular_refs() -> any
+=head2 clone_circular_refs(@args) -> any
 
-No arguments.
+For example, this data:
+
+    $x = [1];
+    $data = [$x, 2, $x];
+
+contains circular references by referring to C<$x> twice. After
+C<clone_circular_refs>, data will become:
+
+    $data = [$x, 2, [1]];
+
+that is, the subsequent circular references will be deep-copied. This makes it
+safe to transport to JSON, for example.
+
+Sometimes it doesn't work, for example:
+
+    $data = [1];
+    push @$data, $data;
+
+Cloning will still create circular references.
+
+This function modifies the data structure in-place, and return true for success
+and false upon failure.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<data>* => I<any>
+
+=back
 
 Return value:
 

@@ -18,7 +18,7 @@ our @EXPORT_OK = qw(
                        tint_rgb_color
                );
 
-our $VERSION = '0.52'; # VERSION
+our $VERSION = '0.53'; # VERSION
 
 sub mix_2_rgb_colors {
     my ($rgb1, $rgb2, $pct) = @_;
@@ -166,7 +166,7 @@ SHARYANTO::Color::Util - Color-related utilities
 
 =head1 VERSION
 
-version 0.52
+version 0.53
 
 =head1 SYNOPSIS
 

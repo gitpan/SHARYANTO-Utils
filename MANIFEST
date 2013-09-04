@@ -18,6 +18,7 @@ lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
 lib/SHARYANTO/Hash/Util.pm
 lib/SHARYANTO/Log/Util.pm
+lib/SHARYANTO/ModuleOrPrefix/Path.pm
 lib/SHARYANTO/Number/Util.pm
 lib/SHARYANTO/Package/Util.pm
 lib/SHARYANTO/Proc/ChildError.pm

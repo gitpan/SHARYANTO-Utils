@@ -130,6 +130,7 @@ sub croak {
 }
 
 1;
+# ABSTRACT: Pick a YAML implementation and use it
 
 __END__
 
@@ -139,11 +140,11 @@ __END__
 
 =head1 NAME
 
-SHARYANTO::YAML::Any_YAMLAny
+SHARYANTO::YAML::Any_YAMLAny - Pick a YAML implementation and use it
 
 =head1 VERSION
 
-version 0.53
+version 0.54
 
 =head1 SYNOPSIS
 

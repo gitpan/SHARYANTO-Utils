@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.53'; # VERSION
+our $VERSION = '0.54'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -55,7 +55,7 @@ SHARYANTO::Getopt::Long::Util - Utilities for Getopt::Long
 
 =head1 VERSION
 
-version 0.53
+version 0.54
 
 =head1 FUNCTIONS
 

@@ -18,7 +18,7 @@ use YAML::Syck;
 $YAML::Syck::ImplicitTyping = 1;
 
 1;
-# ABSTRACT: Pick a YAML implementation and use it.
+# ABSTRACT: Pick a YAML implementation and use it
 
 __END__
 
@@ -28,11 +28,11 @@ __END__
 
 =head1 NAME
 
-SHARYANTO::YAML::Any_SyckOnly - Pick a YAML implementation and use it.
+SHARYANTO::YAML::Any_SyckOnly - Pick a YAML implementation and use it
 
 =head1 VERSION
 
-version 0.53
+version 0.54
 
 =for Pod::Coverage .*
 

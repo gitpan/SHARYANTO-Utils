@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
                        list_subpackages
                );
 
-our $VERSION = '0.54'; # VERSION
+our $VERSION = '0.55'; # VERSION
 
 sub package_exists {
     no strict 'refs';
@@ -74,18 +74,23 @@ sub list_package_contents {
 sub list_subpackages {
     no strict 'refs';
 
-    my ($pkg, $recursive, $cur_res) = @_;
+    my ($pkg, $recursive, $cur_res, $ref_mem) = @_;
 
     return () unless !length($pkg) || package_exists($pkg);
 
+    # this is used to avoid deep recursion. for example (the only one?) %:: and
+    # %main:: point to the same thing.
+    $ref_mem //= {};
+
     my $symtbl = \%{$pkg . "::"};
+    return () if $ref_mem->{"$symtbl"}++;
 
     my $res = $cur_res // [];
-    while (my ($k, $v) = each %$symtbl) {
-        next unless $k =~ s/::$//;
-        my $name = (length($pkg) ? "$pkg\::" : "" ) . $k;
+    for (sort keys %$symtbl) {
+        next unless s/::$//;
+        my $name = (length($pkg) ? "$pkg\::" : "" ) . $_;
         push @$res, $name;
-        list_subpackages($name, 1, $res) if $recursive;
+        list_subpackages($name, 1, $res, $ref_mem) if $recursive;
     }
 
     @$res;
@@ -106,7 +111,7 @@ SHARYANTO::Package::Util - Package-related utilities
 
 =head1 VERSION
 
-version 0.54
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -157,6 +162,14 @@ List subpackages, e.g.:
  )
 
 If $recursive is true, will also list subpackages of subpackages, and so on.
+
+=head1 FAQ
+
+=head2 How to list all existing packages?
+
+You can recurse from the top, e.g.:
+
+ list_subpackages("", 1);
 
 =head1 SEE ALSO
 

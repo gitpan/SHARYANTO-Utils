@@ -144,7 +144,7 @@ SHARYANTO::YAML::Any_YAMLAny - Pick a YAML implementation and use it
 
 =head1 VERSION
 
-version 0.54
+version 0.55
 
 =head1 SYNOPSIS
 

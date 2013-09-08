@@ -17,7 +17,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "SHARYANTO-Utils",
-  "dist_version" => "0.54",
+  "dist_version" => "0.55",
   "license" => "perl",
   "module_name" => "SHARYANTO::Utils",
   "recommends" => {},
@@ -42,9 +42,11 @@ my %module_build_args = (
   },
   "script_files" => [],
   "test_requires" => {
+    "Capture::Tiny" => 0,
     "File::chdir" => 0,
     "Test::Exception" => 0,
-    "Test::More" => "0.98"
+    "Test::More" => "0.98",
+    "blib" => 0
   }
 );
 

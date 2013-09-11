@@ -1,67 +1,74 @@
+#!perl
+
 use strict;
 use warnings;
 
-# This test was generated via Dist::Zilla::Plugin::Test::Compile 2.018
-
-use Test::More 0.88;
+use Test::More;
 
 
 
-use Capture::Tiny qw{ capture };
+use File::Find;
+use File::Temp qw{ tempdir };
 
-my @module_files = qw(
-SHARYANTO/Array/Util.pm
-SHARYANTO/Color/Util.pm
-SHARYANTO/Data/OldUtil.pm
-SHARYANTO/Data/Util.pm
-SHARYANTO/File/Flock.pm
-SHARYANTO/File/Util.pm
-SHARYANTO/Getopt/Long/Util.pm
-SHARYANTO/HTML/Extract/ImageLinks.pm
-SHARYANTO/HTTP/DetectUA/Simple.pm
-SHARYANTO/Hash/Util.pm
-SHARYANTO/Log/Util.pm
-SHARYANTO/ModuleOrPrefix/Path.pm
-SHARYANTO/Number/Util.pm
-SHARYANTO/Package/Util.pm
-SHARYANTO/Proc/ChildError.pm
-SHARYANTO/Proc/Daemon/Prefork.pm
-SHARYANTO/Proc/Util.pm
-SHARYANTO/Role/Doc/Section.pm
-SHARYANTO/Role/Doc/Section/AddTextLines.pm
-SHARYANTO/Role/I18N.pm
-SHARYANTO/Role/I18NMany.pm
-SHARYANTO/Role/I18NRinci.pm
-SHARYANTO/Scalar/Util.pm
-SHARYANTO/Template/Util.pm
-SHARYANTO/Text/Prompt.pm
-SHARYANTO/Utils.pm
-SHARYANTO/YAML/Any.pm
-SHARYANTO/YAML/Any_SyckOnly.pm
-SHARYANTO/YAML/Any_YAMLAny.pm
+my @modules;
+find(
+  sub {
+    return if $File::Find::name !~ /\.pm\z/;
+    my $found = $File::Find::name;
+    $found =~ s{^lib/}{};
+    $found =~ s{[/\\]}{::}g;
+    $found =~ s/\.pm$//;
+    # nothing to skip
+    push @modules, $found;
+  },
+  'lib',
 );
 
-my @scripts = qw(
+sub _find_scripts {
+    my $dir = shift @_;
 
-);
+    my @found_scripts = ();
+    find(
+      sub {
+        return unless -f;
+        my $found = $File::Find::name;
+        # nothing to skip
+        open my $FH, '<', $_ or do {
+          note( "Unable to open $found in ( $! ), skipping" );
+          return;
+        };
+        my $shebang = <$FH>;
+        return unless $shebang =~ /^#!.*?\bperl\b\s*$/;
+        push @found_scripts, $found;
+      },
+      $dir,
+    );
 
-# no fake home requested
-
-my @warnings;
-for my $lib (@module_files)
-{
-    my ($stdout, $stderr, $exit) = capture {
-        system($^X, '-Mblib', '-e', qq{require q[$lib]});
-    };
-    is($?, 0, "$lib loaded ok");
-    warn $stderr if $stderr;
-    push @warnings, $stderr if $stderr;
+    return @found_scripts;
 }
 
+my @scripts;
+do { push @scripts, _find_scripts($_) if -d $_ }
+    for qw{ bin script scripts };
 
+my $plan = scalar(@modules) + scalar(@scripts);
+$plan ? (plan tests => $plan) : (plan skip_all => "no tests to run");
 
-is(scalar(@warnings), 0, 'no warnings found') if $ENV{AUTHOR_TESTING};
+{
+    # fake home for cpan-testers
+    # no fake requested ## local $ENV{HOME} = tempdir( CLEANUP => 1 );
 
+    like( qx{ $^X -Ilib -e "require $_; print '$_ ok'" }, qr/^\s*$_ ok/s, "$_ loaded ok" )
+        for sort @modules;
 
+    SKIP: {
+        eval "use Test::Script 1.05; 1;";
+        skip "Test::Script needed to test script compilation", scalar(@scripts) if $@;
+        foreach my $file ( @scripts ) {
+            my $script = $file;
+            $script =~ s!.*/!!;
+            script_compiles( $file, "$script script compiles" );
+        }
+    }
 
-done_testing;
+}

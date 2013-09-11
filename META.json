@@ -4,7 +4,7 @@
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140",
+   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -14,14 +14,9 @@
    },
    "name" : "SHARYANTO-Utils",
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Module::Build" : "0.3601"
-         }
-      },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.3601"
+            "ExtUtils::MakeMaker" : "6.30"
          }
       },
       "develop" : {
@@ -35,7 +30,6 @@
       "runtime" : {
          "requires" : {
             "Data::Clone" : "0",
-            "Data::Structure::Util" : "0",
             "File::Slurp" : "0",
             "File::Which" : "0",
             "HTML::Parser" : "0",
@@ -47,18 +41,14 @@
             "Rinci" : "v1.1.0",
             "Template::Tiny" : "0",
             "URI::URL" : "0",
-            "YAML::Syck" : "0",
             "experimental" : "0",
             "perl" : "5.010001"
          }
       },
       "test" : {
          "requires" : {
-            "Capture::Tiny" : "0",
-            "File::chdir" : "0",
             "Test::Exception" : "0",
-            "Test::More" : "0.98",
-            "blib" : "0"
+            "Test::More" : "0.98"
          }
       }
    },
@@ -69,6 +59,6 @@
          "url" : "http://github.com/sharyanto/perl-SHARYANTO-Utils"
       }
    },
-   "version" : "0.55"
+   "version" : "0.56"
 }
 

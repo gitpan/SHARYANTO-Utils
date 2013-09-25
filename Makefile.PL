@@ -26,19 +26,24 @@ my %WriteMakefileArgs = (
     "HTML::Parser" => 0,
     "Locale::Maketext::Lexicon" => 0,
     "Log::Any" => 0,
+    "Module::List" => 0,
     "Moo::Role" => 0,
     "Parse::Netstat" => 0,
     "Perinci::Object" => "0.07",
     "Rinci" => "v1.1.0",
     "Template::Tiny" => 0,
+    "Term::Detect" => "0.08",
     "URI::URL" => 0,
     "experimental" => 0
   },
   "TEST_REQUIRES" => {
+    "File::Spec" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
     "Test::Exception" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.56",
+  "VERSION" => "0.57",
   "test" => {
     "TESTS" => "t/*.t"
   }

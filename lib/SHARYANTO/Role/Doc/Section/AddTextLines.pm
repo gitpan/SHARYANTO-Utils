@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.56'; # VERSION
+our $VERSION = '0.57'; # VERSION
 
 requires 'doc_lines';
 requires 'doc_indent_level';
@@ -111,7 +111,7 @@ SHARYANTO::Role::Doc::Section::AddTextLines - Provide add_doc_lines() to add tex
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 DESCRIPTION
 

@@ -20,6 +20,7 @@ name: SHARYANTO-Utils
 recommends:
   Term::Size: 0
 requires:
+  Color::ANSI::Util: 0.03
   Data::Clone: 0
   File::Slurp: 0
   File::Which: 0
@@ -39,4 +40,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/SHARYANTO-Utils/
   repository: http://github.com/sharyanto/perl-SHARYANTO-Utils
-version: 0.57
+version: 0.58

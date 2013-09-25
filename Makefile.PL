@@ -20,6 +20,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "SHARYANTO::Utils",
   "PREREQ_PM" => {
+    "Color::ANSI::Util" => "0.03",
     "Data::Clone" => 0,
     "File::Slurp" => 0,
     "File::Which" => 0,
@@ -43,7 +44,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.57",
+  "VERSION" => "0.58",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     "Perinci::Object" => "0.07",
     "Rinci" => "v1.1.0",
     "Template::Tiny" => 0,
-    "Term::Detect" => "0.08",
+    "Term::Detect::Software" => 0,
     "URI::URL" => 0,
     "experimental" => 0
   },
@@ -44,7 +44,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.58",
+  "VERSION" => "0.59",
   "test" => {
     "TESTS" => "t/*.t"
   }

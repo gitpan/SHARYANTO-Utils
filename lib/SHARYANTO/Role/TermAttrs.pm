@@ -3,15 +3,15 @@ package SHARYANTO::Role::TermAttrs;
 use 5.010;
 use Moo::Role;
 
-our $VERSION = '0.58'; # VERSION
+our $VERSION = '0.59'; # VERSION
 
 my $dt_cache;
 sub detect_terminal {
     my $self = shift;
 
     if (!$dt_cache) {
-        require Term::Detect;
-        $dt_cache = Term::Detect::detect_terminal_cached("p") // {};
+        require Term::Detect::Software;
+        $dt_cache = Term::Detect::Software::detect_terminal_cached();
         #use Data::Dump; dd $dt_cache;
     }
     $dt_cache;
@@ -54,9 +54,9 @@ has color_depth => (
 has use_box_chars => (
     is      => 'rw',
     default => sub {
+        my $self = shift;
         return $ENV{BOX_CHARS} if defined $ENV{BOX_CHARS};
-        return 0 if $^O =~ /Win/; # Win32::Console::ANSI doesn't support this
-        1;
+        return $self->detect_terminal->{box_chars} // 0;
     },
 );
 
@@ -121,7 +121,7 @@ SHARYANTO::Role::TermAttrs - Role for terminal-related attributes
 
 =head1 VERSION
 
-version 0.58
+version 0.59
 
 =head1 DESCRIPTION
 

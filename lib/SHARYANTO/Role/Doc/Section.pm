@@ -4,7 +4,7 @@ use 5.010;
 use Log::Any '$log';
 use Moo::Role;
 
-our $VERSION = '0.59'; # VERSION
+our $VERSION = '0.60'; # VERSION
 
 has doc_sections => (is=>'rw');
 has doc_lines => (is => 'rw'); # store final result, array
@@ -85,7 +85,7 @@ sub gen_doc {
 
     for my $s (@{ $self->doc_sections // [] }) {
         my $meth = "gen_doc_section_$s";
-        $log->tracef("=> $meth()");
+        $log->tracef("=> $meth(%s)", \%opts);
         $self->$meth(%opts);
     }
 
@@ -110,7 +110,7 @@ SHARYANTO::Role::Doc::Section - Role for class that generates documentation with
 
 =head1 VERSION
 
-version 0.59
+version 0.60
 
 =head1 DESCRIPTION
 

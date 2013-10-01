@@ -3,7 +3,7 @@ package SHARYANTO::Role::TermAttrs;
 use 5.010;
 use Moo::Role;
 
-our $VERSION = '0.59'; # VERSION
+our $VERSION = '0.60'; # VERSION
 
 my $dt_cache;
 sub detect_terminal {
@@ -33,11 +33,19 @@ sub _term_size {
     ($termw_cache, $termh_cache);
 }
 
+has interactive => (
+    is      => 'rw',
+    default => sub {
+        my $self = shift;
+        $ENV{INTERACTIVE} // (-t STDOUT);
+    },
+);
+
 has use_color => (
     is      => 'rw',
     default => sub {
         my $self = shift;
-        $ENV{COLOR} // (-t STDOUT) //
+        $ENV{COLOR} // $ENV{INTERACTIVE} //
             $self->detect_terminal->{color_depth} > 0;
     },
 );
@@ -67,7 +75,8 @@ has use_utf8 => (
         return $ENV{UTF8} if defined $ENV{UTF8};
         my $termuni = $self->detect_terminal->{unicode};
         if (defined $termuni) {
-            return $termuni && (($ENV{LANG} // "") =~ /utf-?8/i ? 1:0);
+            return $termuni &&
+                (($ENV{LANG} || $ENV{LANGUAGE} || "") =~ /utf-?8/i ? 1:0);
         }
         0;
     },
@@ -94,8 +103,8 @@ has term_height => (
     is      => 'rw',
     default => sub {
         my $self = shift;
-        if ($ENV{ROWS}) {
-            return $ENV{ROWS};
+        if ($ENV{LINES}) {
+            return $ENV{LINES};
         }
         my (undef, $termh) = $self->_term_size;
         if (!$termh) {
@@ -121,7 +130,7 @@ SHARYANTO::Role::TermAttrs - Role for terminal-related attributes
 
 =head1 VERSION
 
-version 0.59
+version 0.60
 
 =head1 DESCRIPTION
 
@@ -130,14 +139,19 @@ whether to use UTF8 characters, whether to use colors, and color depth. Defaults
 are set from environment variables or by detecting terminal
 software/capabilities.
 
-xo
 =head1 ATTRIBUTES
 
 =head2 use_utf8 => BOOL (default: from env, or detected from terminal)
 
+The default is retrieved from environment: if C<UTF8> is set, it is used.
+Otherwise, the default is on if terminal emulator software supports Unicode
+I<and> language (LANG/LANGUAGE) setting has /utf-?8/i in it.
+
 =head2 use_box_chars => BOOL (default: from env, or detected from OS)
 
 Default is 0 for Windows.
+
+=head2 interactive => BOOL (default: from env, or detected from terminal)
 
 =head2 use_color => BOOL (default: from env, or detected from terminal)
 
@@ -149,13 +163,21 @@ Default is 0 for Windows.
 
 =head1 METHODS
 
-=head2 detect_terminal => HASH
+=head2 detect_terminal() => HASH
+
+Call L<Term::Detect::Software>'s C<detect_terminal_cached>.
 
 =head1 ENVIRONMENT
 
 =over
 
 =item * UTF8 => BOOL
+
+Can be used to set C<use_utf8>.
+
+=item * INTERACTIVE => BOOL
+
+Can be used to set C<interactive>.
 
 =item * COLOR => BOOL
 
@@ -173,7 +195,7 @@ Can be used to set C<use_box_chars>.
 
 Can be used to set C<term_width>.
 
-=item * ROWS => INT
+=item * LINES => INT
 
 Can be used to set C<term_height>.
 

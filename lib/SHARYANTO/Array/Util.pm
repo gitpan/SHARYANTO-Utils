@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.59'; # VERSION
+our $VERSION = '0.60'; # VERSION
 
 our %SPEC;
 
@@ -85,7 +85,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.59
+version 0.60
 
 =head1 SYNOPSIS
 

@@ -8,12 +8,19 @@ use Color::ANSI::Util qw(ansi16fg ansi16bg
                          ansi256fg ansi256bg
                          ansi24bfg ansi24bbg);
 
-our $VERSION = '0.60'; # VERSION
+our $VERSION = '0.61'; # VERSION
 
 with 'SHARYANTO::Role::TermAttrs';
 
 has color_theme_args  => (is => 'rw', default => sub { {} });
 has _all_color_themes => (is => 'rw');
+has color_theme_class_prefix => (
+    is => 'rw',
+    default => sub {
+        my $self = shift;
+        (ref($self) ? ref($self) : $self ) . '::ColorTheme';
+    },
+);
 
 sub color_theme {
     my $self = shift;
@@ -31,7 +38,7 @@ sub color_theme {
     if (!$ct->{no_color} && !$self->use_color) {
         $err = "color theme uses color but use_color is set to false";
     }
-   die "Can't select color theme$p2: $err" if $err;
+    die "Can't select color theme$p2: $err" if $err;
 
     $self->{color_theme} = $ct;
 }
@@ -39,9 +46,7 @@ sub color_theme {
 sub get_color_theme {
     my ($self, $ct) = @_;
 
-    my $prefix = (ref($self) ? ref($self) : $self ) .
-        '::ColorTheme'; # XXX allow override
-
+    my $prefix = $self->color_theme_class_prefix;
     my $cts;
     my $pkg;
     if ($ct =~ s/(.+):://) {
@@ -56,9 +61,9 @@ sub get_color_theme {
             "use list_color_themes() to list available themes";
     }
     $cts->{$ct} or die "Unknown color theme name '$ct'".
-        ($pkg ? " in package $prefix\::$pkg" : "");
+        ($pkg ? " in package $pkg" : "");
     ($cts->{$ct}{v} // 1.0) == 1.1 or die "Color theme '$ct' is too old ".
-        "(v < 1.1)". ($pkg ? ", please upgrade $prefix\::$pkg" : "");
+        "(v < 1.1)". ($pkg ? ", please upgrade $pkg" : "");
     $cts->{$ct};
 }
 
@@ -134,9 +139,7 @@ sub list_color_themes {
 
     my ($self, $detail) = @_;
 
-    my $prefix = (ref($self) ? ref($self) : $self ) .
-        '::ColorTheme'; # XXX allow override
-
+    my $prefix = $self->color_theme_class_prefix;
     my $all_ct = $self->_all_color_themes;
 
     if (!$all_ct) {
@@ -181,7 +184,7 @@ SHARYANTO::Role::ColorTheme - Role for class wanting to support color themes
 
 =head1 VERSION
 
-version 0.60
+version 0.61
 
 =head1 DESCRIPTION
 
@@ -212,6 +215,8 @@ Text::ANSITable, you can get the row position from C<< $self->{_draw}{y} >>.
 =head2 color_theme => HASH
 
 =head2 color_theme_args => HASH
+
+=head2 color_theme_class_prefix => STR (default: CLASS + "::ColorTheme")
 
 =head1 METHODS
 

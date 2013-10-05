@@ -3,7 +3,7 @@ use warnings;
 
 # this test was generated with Dist::Zilla::Plugin::Test::Compile 2.033
 
-use Test::More  tests => 22 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 14 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
@@ -18,14 +18,6 @@ my @module_files = (
     'SHARYANTO/ModuleOrPrefix/Path.pm',
     'SHARYANTO/Proc/ChildError.pm',
     'SHARYANTO/Proc/Daemon/Prefork.pm',
-    'SHARYANTO/Role/BorderStyle.pm',
-    'SHARYANTO/Role/ColorTheme.pm',
-    'SHARYANTO/Role/Doc/Section.pm',
-    'SHARYANTO/Role/Doc/Section/AddTextLines.pm',
-    'SHARYANTO/Role/I18N.pm',
-    'SHARYANTO/Role/I18NMany.pm',
-    'SHARYANTO/Role/I18NRinci.pm',
-    'SHARYANTO/Role/TermAttrs.pm',
     'SHARYANTO/Scalar/Util.pm',
     'SHARYANTO/Template/Util.pm',
     'SHARYANTO/Text/Prompt.pm',

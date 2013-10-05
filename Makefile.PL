@@ -20,20 +20,13 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "SHARYANTO::Utils",
   "PREREQ_PM" => {
-    "Color::ANSI::Util" => "0.03",
     "Data::Clone" => 0,
     "File::Slurp" => 0,
     "File::Which" => 0,
     "HTML::Parser" => 0,
-    "Locale::Maketext::Lexicon" => 0,
-    "Log::Any" => 0,
-    "Module::List" => 0,
-    "Moo::Role" => 0,
     "Parse::Netstat" => 0,
-    "Perinci::Object" => "0.07",
     "Rinci" => "v1.1.0",
     "Template::Tiny" => 0,
-    "Term::Detect::Software" => 0,
     "URI::URL" => 0,
     "experimental" => 0
   },
@@ -44,7 +37,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.61",
+  "VERSION" => "0.62",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.62'; # VERSION
+our $VERSION = '0.63'; # VERSION
 
 our %SPEC;
 
@@ -77,7 +77,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -85,7 +85,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 SYNOPSIS
 
@@ -93,13 +93,16 @@ version 0.62
 
 =head1 FUNCTIONS
 
-None are exported by default, but they are exportable.
-
-
-None are exported by default, but they are exportable.
 
 =head2 match_array_or_regex(@args) -> any
 
+Check whether an item matches (list of) values/regexes.
+
+Examples:
+
+ match_array_or_regex(haystack => ["abc", "abd"], needle => "abc"); # -> 1
+ match_array_or_regex(haystack => qr/ab./, needle => "abc"); # -> 1
+ match_array_or_regex(haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
 This routine can be used to match an item against a regex or a list of
 strings/regexes, e.g. when matching against an ACL.
 
@@ -117,6 +120,13 @@ Return value:
 
 =head2 match_regex_or_array(@args) -> any
 
+Alias for match_array_or_regex.
+
+Examples:
+
+ match_regex_or_array(haystack => ["abc", "abd"], needle => "abc"); # -> 1
+ match_regex_or_array(haystack => qr/ab./, needle => "abc"); # -> 1
+ match_regex_or_array(haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
 This routine can be used to match an item against a regex or a list of
 strings/regexes, e.g. when matching against an ACL.
 
@@ -131,6 +141,26 @@ Arguments ('*' denotes required arguments):
 =back
 
 Return value:
+
+=head1 SEE ALSO
+
+L<SHARYANTO>
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/SHARYANTO-Utils>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-SHARYANTO-Utils>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=SHARYANTO-Utils>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 =head1 AUTHOR
 

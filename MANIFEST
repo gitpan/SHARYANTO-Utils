@@ -21,6 +21,7 @@ lib/SHARYANTO/Scalar/Util.pm
 lib/SHARYANTO/Template/Util.pm
 lib/SHARYANTO/Text/Prompt.pm
 lib/SHARYANTO/Utils.pm
+lib/SHARYANTO/Version/Util.pm
 t/00-compile.t
 t/array_util.t
 t/colortheme_util.t
@@ -33,4 +34,5 @@ t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/release-rinci.t
 t/scalar_util.t
+t/version_util.t
 weaver.ini

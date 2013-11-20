@@ -11,7 +11,7 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.62'; # VERSION
+our $VERSION = '0.63'; # VERSION
 
 our %SPEC;
 
@@ -77,7 +77,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -85,16 +85,14 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 FUNCTIONS
 
-None are exported by default, but they are exportable.
-
-
-None are exported by default, but they are exportable.
 
 =head2 extract_image_links(%args) -> [status, msg, result, meta]
+
+Extract image links from HTML document.
 
 Either specify either url, html.
 
@@ -116,6 +114,26 @@ Return value:
 
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
+=head1 SEE ALSO
+
+L<SHARYANTO>
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/SHARYANTO-Utils>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-SHARYANTO-Utils>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=SHARYANTO-Utils>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
 =head1 AUTHOR
 
 Steven Haryanto <stevenharyanto@gmail.com>
@@ -126,7 +144,5 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
-=head1 DESCRIPTION
 
 =cut

@@ -2,13 +2,31 @@ NAME
     SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 VERSION
-    version 0.62
+    version 0.63
 
 FAQ
   What is this?
     This distribution is a heterogenous collection of modules that will
     eventually have their own proper distributions. See SHARYANTO about this
     temporary namespace.
+
+SEE ALSO
+    SHARYANTO
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/SHARYANTO-Utils>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/sharyanto/perl-SHARYANTO-Utils>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=SHARYANTO-Utils>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
 
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
@@ -18,8 +36,4 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
-
-DESCRIPTION
-FUNCTIONS
-    None are exported by default, but they are exportable.
 

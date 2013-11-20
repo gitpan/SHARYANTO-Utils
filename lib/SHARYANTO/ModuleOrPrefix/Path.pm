@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use File::Basename 'dirname';
 
-our $VERSION = '0.62'; # VERSION
+our $VERSION = '0.63'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -70,7 +70,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -78,7 +78,7 @@ SHARYANTO::ModuleOrPrefix::Path - Get the full path to a locally installed modul
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 SYNOPSIS
 
@@ -98,12 +98,27 @@ The code is based on Neil Bower's L<Module::Path>.
 
 =head2 module_or_prefix_path(MODULE) => STR
 
-
-None are exported by default, but they are exportable.
-
 =head1 SEE ALSO
 
+L<SHARYANTO>
+
 L<Module::Path>
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/SHARYANTO-Utils>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-SHARYANTO-Utils>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=SHARYANTO-Utils>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 =head1 AUTHOR
 

@@ -32,7 +32,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=SHARYANTO-Utils
   homepage: https://metacpan.org/release/SHARYANTO-Utils
   repository: git://github.com/sharyanto/perl-SHARYANTO-Utils.git
-version: 0.63
+version: 0.64
 x_Dist_Zilla:
   perl:
     version: 5.010001

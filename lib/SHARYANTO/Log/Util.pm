@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(@log_levels $log_levels_re);
 
-our $VERSION = '0.63'; # VERSION
+our $VERSION = '0.64'; # VERSION
 
 our @log_levels = (qw/trace debug info warn error fatal/);
 our $log_levels_re = join("|", @log_levels);
@@ -29,7 +29,7 @@ SHARYANTO::Log::Util - Log-related utilities
 
 =head1 VERSION
 
-version 0.63
+version 0.64
 
 =head1 SYNOPSIS
 

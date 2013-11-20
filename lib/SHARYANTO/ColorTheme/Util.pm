@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(create_color_theme_transform);
 
-our $VERSION = '0.63'; # VERSION
+our $VERSION = '0.64'; # VERSION
 
 sub create_color_theme_transform {
     my ($basect, $func) = @_;
@@ -60,7 +60,7 @@ SHARYANTO::ColorTheme::Util - Utility routines
 
 =head1 VERSION
 
-version 0.63
+version 0.64
 
 =head1 FUNCTIONS
 

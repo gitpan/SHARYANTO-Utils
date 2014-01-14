@@ -21,13 +21,13 @@ our %EXPORT_TAGS = (
     locale_h => ['setlocale', @posix_consts],
 );
 
-our $VERSION = '0.65'; # VERSION
+our $VERSION = '0.66'; # VERSION
 
 sub setlocale {
     my ($cat, $locale) = @_;
     state %mem;
 
-    if ($locale =~ /\./) {
+    if (!$locale || $locale =~ /\./) {
         return POSIX::setlocale($cat, $locale);
     } elsif ($mem{$locale}) {
         return POSIX::setlocale($cat, $mem{$locale});
@@ -63,7 +63,7 @@ SHARYANTO::Locale::Util - Locale utilities
 
 =head1 VERSION
 
-version 0.65
+version 0.66
 
 =head1 SYNOPSIS
 

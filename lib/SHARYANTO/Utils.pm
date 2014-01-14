@@ -2,7 +2,7 @@ package SHARYANTO::Utils;
 
 use 5.010001;
 
-our $VERSION = '0.65'; # VERSION
+our $VERSION = '0.66'; # VERSION
 
 1;
 # ABSTRACT: SHARYANTO's temporary namespace for various routines
@@ -19,7 +19,7 @@ SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 =head1 VERSION
 
-version 0.65
+version 0.66
 
 =head1 FAQ
 

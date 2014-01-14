@@ -13,6 +13,7 @@ lib/SHARYANTO/Getopt/Long/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
 lib/SHARYANTO/Hash/Util.pm
+lib/SHARYANTO/Locale/Util.pm
 lib/SHARYANTO/Log/Util.pm
 lib/SHARYANTO/ModuleOrPrefix/Path.pm
 lib/SHARYANTO/Proc/ChildError.pm

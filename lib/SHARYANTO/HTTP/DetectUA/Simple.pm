@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(detect_http_ua_simple);
 
-our $VERSION = '0.64'; # VERSION
+our $VERSION = '0.65'; # VERSION
 
 our %SPEC;
 
@@ -121,7 +121,7 @@ SHARYANTO::HTTP::DetectUA::Simple - A very simple and generic browser detection 
 
 =head1 VERSION
 
-version 0.64
+version 0.65
 
 =head1 DESCRIPTION
 
@@ -166,7 +166,30 @@ Arguments ('*' denotes required arguments):
 
 =item * B<env> => I<any>
 
-CGI-compatible environment, e.g. \%ENV or PSGI's $env.
+Detect whether HTTP client is a GUI/TUI browser.
+
+This function is a simple and fast routine to detect whether HTTP client is a
+GUI browser (like Chrome or Firefox), a text-based browser (like Lynx or Links),
+or neither (like curl or LWP). Extra information can be provided in the future.
+
+Currently these heuristic rules are used:
+
+=over
+
+=item *
+
+check popular browser markers in User-Agent header (e.g. 'Chrome', 'Opera');
+
+
+=item *
+
+check Accept header for 'image/';
+
+
+=back
+
+It is several times faster than the other equivalent Perl modules, this is
+because it does significantly less.
 
 =back
 
@@ -200,7 +223,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

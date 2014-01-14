@@ -11,7 +11,7 @@ use Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(extract_image_links);
 
-our $VERSION = '0.64'; # VERSION
+our $VERSION = '0.65'; # VERSION
 
 our %SPEC;
 
@@ -85,7 +85,7 @@ SHARYANTO::HTML::Extract::ImageLinks - Extract image links from HTML document
 
 =head1 VERSION
 
-version 0.64
+version 0.65
 
 =head1 FUNCTIONS
 
@@ -102,11 +102,15 @@ Arguments ('*' denotes required arguments):
 
 =item * B<base> => I<str>
 
-base URL for images.
+Extract image links from HTML document.
+
+Either specify either url, html.
 
 =item * B<html>* => I<str>
 
-HTML document to extract from.
+Extract image links from HTML document.
+
+Either specify either url, html.
 
 =back
 
@@ -140,7 +144,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

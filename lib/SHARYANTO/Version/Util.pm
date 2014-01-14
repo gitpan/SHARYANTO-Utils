@@ -14,7 +14,7 @@ our @EXPORT_OK = qw(
                        version_between version_in
                );
 
-our $VERSION = '0.64'; # VERSION
+our $VERSION = '0.65'; # VERSION
 
 sub cmp_version {
     version->parse($_[0]) <=> version->parse($_[1]);
@@ -77,7 +77,7 @@ SHARYANTO::Version::Util - Version utilities
 
 =head1 VERSION
 
-version 0.64
+version 0.65
 
 =head1 FUNCTIONS
 
@@ -129,7 +129,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

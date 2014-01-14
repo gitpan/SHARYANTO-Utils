@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.64'; # VERSION
+our $VERSION = '0.65'; # VERSION
 
 our %SPEC;
 
@@ -85,7 +85,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.64
+version 0.65
 
 =head1 SYNOPSIS
 
@@ -112,7 +112,17 @@ Arguments ('*' denotes required arguments):
 
 =item * B<haystack>* => I<any>
 
+Check whether an item matches (list of) values/regexes.
+
+This routine can be used to match an item against a regex or a list of
+strings/regexes, e.g. when matching against an ACL.
+
 =item * B<needle>* => I<str>
+
+Check whether an item matches (list of) values/regexes.
+
+This routine can be used to match an item against a regex or a list of
+strings/regexes, e.g. when matching against an ACL.
 
 =back
 
@@ -136,7 +146,17 @@ Arguments ('*' denotes required arguments):
 
 =item * B<haystack>* => I<any>
 
+Alias for match_array_or_regex.
+
+This routine can be used to match an item against a regex or a list of
+strings/regexes, e.g. when matching against an ACL.
+
 =item * B<needle>* => I<str>
+
+Alias for match_array_or_regex.
+
+This routine can be used to match an item against a regex or a list of
+strings/regexes, e.g. when matching against an ACL.
 
 =back
 
@@ -168,7 +188,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

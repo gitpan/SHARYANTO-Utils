@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use File::Basename 'dirname';
 
-our $VERSION = '0.67'; # VERSION
+our $VERSION = '0.68'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -78,7 +78,7 @@ SHARYANTO::ModuleOrPrefix::Path - Get the full path to a locally installed modul
 
 =head1 VERSION
 
-version 0.67
+version 0.68
 
 =head1 SYNOPSIS
 

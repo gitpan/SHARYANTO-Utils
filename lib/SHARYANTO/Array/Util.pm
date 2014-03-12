@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(match_array_or_regex match_regex_or_array);
 
-our $VERSION = '0.67'; # VERSION
+our $VERSION = '0.68'; # VERSION
 
 our %SPEC;
 
@@ -85,7 +85,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.67
+version 0.68
 
 =head1 SYNOPSIS
 
@@ -112,17 +112,7 @@ Arguments ('*' denotes required arguments):
 
 =item * B<haystack>* => I<any>
 
-Check whether an item matches (list of) values/regexes.
-
-This routine can be used to match an item against a regex or a list of
-strings/regexes, e.g. when matching against an ACL.
-
 =item * B<needle>* => I<str>
-
-Check whether an item matches (list of) values/regexes.
-
-This routine can be used to match an item against a regex or a list of
-strings/regexes, e.g. when matching against an ACL.
 
 =back
 
@@ -146,17 +136,7 @@ Arguments ('*' denotes required arguments):
 
 =item * B<haystack>* => I<any>
 
-Alias for match_array_or_regex.
-
-This routine can be used to match an item against a regex or a list of
-strings/regexes, e.g. when matching against an ACL.
-
 =item * B<needle>* => I<str>
-
-Alias for match_array_or_regex.
-
-This routine can be used to match an item against a regex or a list of
-strings/regexes, e.g. when matching against an ACL.
 
 =back
 

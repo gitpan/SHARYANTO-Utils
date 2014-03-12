@@ -1,9 +1,10 @@
+use 5.006;
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.037
+# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.039
 
-use Test::More  tests => 16 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 15 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
@@ -18,7 +19,6 @@ my @module_files = (
     'SHARYANTO/Log/Util.pm',
     'SHARYANTO/ModuleOrPrefix/Path.pm',
     'SHARYANTO/Proc/ChildError.pm',
-    'SHARYANTO/Proc/Daemon/Prefork.pm',
     'SHARYANTO/Scalar/Util.pm',
     'SHARYANTO/Template/Util.pm',
     'SHARYANTO/Text/Prompt.pm',
@@ -36,11 +36,12 @@ use File::Spec;
 use IPC::Open3;
 use IO::Handle;
 
+open my $stdin, '<', File::Spec->devnull or die "can't open devnull: $!";
+
 my @warnings;
 for my $lib (@module_files)
 {
     # see L<perlfaq8/How can I capture STDERR from an external command?>
-    open my $stdin, '<', File::Spec->devnull or die "can't open devnull: $!";
     my $stderr = IO::Handle->new;
 
     my $pid = open3($stdin, '>&STDERR', $stderr, $^X, $inc_switch, '-e', "require q[$lib]");

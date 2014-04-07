@@ -30,7 +30,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=SHARYANTO-Utils
   homepage: https://metacpan.org/release/SHARYANTO-Utils
   repository: git://github.com/sharyanto/perl-SHARYANTO-Utils.git
-version: '0.68'
+version: '0.69'
 x_Dist_Zilla:
   perl:
     version: '5.018002'
@@ -112,9 +112,9 @@ x_Dist_Zilla:
       name: '@Author::SHARYANTO/MetaConfig'
       version: '5.013'
     -
-      class: Dist::Zilla::Plugin::OurPkgVersion
-      name: '@Author::SHARYANTO/OurPkgVersion'
-      version: '0.005001'
+      class: Dist::Zilla::Plugin::SHARYANTO::OurPkgVersion
+      name: '@Author::SHARYANTO/SHARYANTO::OurPkgVersion'
+      version: '0.02'
     -
       class: Dist::Zilla::Plugin::PodWeaver
       config:
@@ -209,6 +209,10 @@ x_Dist_Zilla:
               version: '4.006'
       name: '@Author::SHARYANTO/PodWeaver'
       version: '4.005'
+    -
+      class: Dist::Zilla::Plugin::PruneFiles
+      name: '@Author::SHARYANTO/PruneFiles'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ReadmeFromPod
       name: '@Author::SHARYANTO/ReadmeFromPod'

@@ -14,7 +14,7 @@ our @EXPORT_OK = qw(
                        version_between version_in
                );
 
-our $VERSION = '0.68'; # VERSION
+our $VERSION = '0.69'; # VERSION
 
 sub cmp_version {
     version->parse($_[0]) <=> version->parse($_[1]);
@@ -77,7 +77,7 @@ SHARYANTO::Version::Util - Version utilities
 
 =head1 VERSION
 
-version 0.68
+version 0.69
 
 =head1 FUNCTIONS
 

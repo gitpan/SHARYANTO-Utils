@@ -21,7 +21,7 @@ our %EXPORT_TAGS = (
     locale_h => ['setlocale', @posix_consts],
 );
 
-our $VERSION = '0.69'; # VERSION
+our $VERSION = '0.70'; # VERSION
 
 sub setlocale {
     my $cat = shift;
@@ -65,7 +65,7 @@ SHARYANTO::Locale::Util - Locale utilities
 
 =head1 VERSION
 
-version 0.69
+version 0.70
 
 =head1 SYNOPSIS
 

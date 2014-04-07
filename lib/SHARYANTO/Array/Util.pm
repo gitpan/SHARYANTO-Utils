@@ -14,7 +14,7 @@ our @EXPORT_OK = qw(
                        split_array
                );
 
-our $VERSION = '0.69'; # VERSION
+our $VERSION = '0.70'; # VERSION
 
 our %SPEC;
 
@@ -88,7 +88,7 @@ sub split_array {
     my ($pat, $ary, $limit) = @_;
 
     die "BUG: Second argument must be an array" unless ref($ary) eq 'ARRAY';
-    $pat = qr/$pat/ unless ref($pat) eq 'Regexp';
+    $pat = qr/\A\Q$pat\E\z/ unless ref($pat) eq 'Regexp';
 
     my @res;
     my $num_elems = 0;
@@ -132,7 +132,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.69
+version 0.70
 
 =head1 SYNOPSIS
 

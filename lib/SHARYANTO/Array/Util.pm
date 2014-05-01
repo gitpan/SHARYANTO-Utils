@@ -14,7 +14,7 @@ our @EXPORT_OK = qw(
                        split_array
                );
 
-our $VERSION = '0.70'; # VERSION
+our $VERSION = '0.71'; # VERSION
 
 our %SPEC;
 
@@ -132,7 +132,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-version 0.70
+This document describes version 0.71 of SHARYANTO::Array::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-01.
 
 =head1 SYNOPSIS
 
@@ -158,20 +158,10 @@ version 0.70
 
 =head1 FUNCTIONS
 
-=head2 split_array($str_or_re, \@array[, $num]) => LIST
+=head2 split_array($str_or_re, \@array[, $limit]) => LIST
 
 Like the C<split()> builtin Perl function, but applies on an array instead of a
 scalar. It loosely follows the C<split()> semantic, with some exceptions.
-
-=head2 TODO
-
-=over
-
-=item * [REJECT] split_array: By default operate on C<@_>?
-
-Like C<split>'s behavior of by default operating on C<$_>.
-
-=back
 
 
 =head2 match_array_or_regex(@args) -> any
@@ -180,9 +170,9 @@ Check whether an item matches (list of) values/regexes.
 
 Examples:
 
- match_array_or_regex(haystack => ["abc", "abd"], needle => "abc"); # -> 1
- match_array_or_regex(haystack => qr/ab./, needle => "abc"); # -> 1
- match_array_or_regex(haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
+ match_array_or_regex( haystack => ["abc", "abd"], needle => "abc"); # -> 1
+ match_array_or_regex( haystack => qr/ab./, needle => "abc"); # -> 1
+ match_array_or_regex( haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
 This routine can be used to match an item against a regex or a list of
 strings/regexes, e.g. when matching against an ACL.
 
@@ -214,9 +204,9 @@ Alias for match_array_or_regex.
 
 Examples:
 
- match_regex_or_array(haystack => ["abc", "abd"], needle => "abc"); # -> 1
- match_regex_or_array(haystack => qr/ab./, needle => "abc"); # -> 1
- match_regex_or_array(haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
+ match_regex_or_array( haystack => ["abc", "abd"], needle => "abc"); # -> 1
+ match_regex_or_array( haystack => qr/ab./, needle => "abc"); # -> 1
+ match_regex_or_array( haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
 This routine can be used to match an item against a regex or a list of
 strings/regexes, e.g. when matching against an ACL.
 
@@ -240,6 +230,16 @@ Arguments ('*' denotes required arguments):
 =back
 
 Return value:
+
+=head1 TODO
+
+=over
+
+=item * [REJECT] split_array: By default operate on C<@_>?
+
+Like C<split>'s behavior of by default operating on C<$_>.
+
+=back
 
 =head1 SEE ALSO
 

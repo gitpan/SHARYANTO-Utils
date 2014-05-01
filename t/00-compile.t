@@ -4,26 +4,21 @@ use warnings;
 
 # this test was generated with Dist::Zilla::Plugin::Test::Compile 2.039
 
-use Test::More  tests => 15 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 10 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
 my @module_files = (
     'SHARYANTO/Array/Util.pm',
     'SHARYANTO/ColorTheme/Util.pm',
-    'SHARYANTO/Getopt/Long/Util.pm',
     'SHARYANTO/HTML/Extract/ImageLinks.pm',
     'SHARYANTO/HTTP/DetectUA/Simple.pm',
     'SHARYANTO/Hash/Util.pm',
     'SHARYANTO/Locale/Util.pm',
     'SHARYANTO/Log/Util.pm',
-    'SHARYANTO/ModuleOrPrefix/Path.pm',
-    'SHARYANTO/Proc/ChildError.pm',
-    'SHARYANTO/Scalar/Util.pm',
     'SHARYANTO/Template/Util.pm',
     'SHARYANTO/Text/Prompt.pm',
-    'SHARYANTO/Utils.pm',
-    'SHARYANTO/Version/Util.pm'
+    'SHARYANTO/Utils.pm'
 );
 
 

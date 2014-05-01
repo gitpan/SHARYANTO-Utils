@@ -9,7 +9,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(rename_key);
 
-our $VERSION = '0.70'; # VERSION
+our $VERSION = '0.71'; # VERSION
 
 sub rename_key {
     my ($h, $okey, $nkey) = @_;
@@ -33,7 +33,7 @@ SHARYANTO::Hash::Util - Hash utilities
 
 =head1 VERSION
 
-version 0.70
+This document describes version 0.71 of SHARYANTO::Hash::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-01.
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,8 @@ NAME
     SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 VERSION
-    version 0.70
+    This document describes version 0.71 of SHARYANTO::Utils (from Perl
+    distribution SHARYANTO-Utils), released on 2014-05-01.
 
 FAQ
   What is this?

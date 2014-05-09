@@ -2,7 +2,7 @@ package SHARYANTO::Utils;
 
 use 5.010001;
 
-our $VERSION = '0.72'; # VERSION
+our $VERSION = '0.73'; # VERSION
 
 1;
 # ABSTRACT: SHARYANTO's temporary namespace for various routines
@@ -19,7 +19,7 @@ SHARYANTO::Utils - SHARYANTO's temporary namespace for various routines
 
 =head1 VERSION
 
-This document describes version 0.72 of SHARYANTO::Utils (from Perl distribution SHARYANTO-Utils), released on 2014-05-08.
+This document describes version 0.73 of SHARYANTO::Utils (from Perl distribution SHARYANTO-Utils), released on 2014-05-10.
 
 =head1 FAQ
 

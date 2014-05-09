@@ -8,7 +8,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(prompt);
 
-our $VERSION = '0.72'; # VERSION
+our $VERSION = '0.73'; # VERSION
 
 sub prompt {
     my ($text, $opts) = @_;
@@ -68,7 +68,7 @@ SHARYANTO::Text::Prompt - Prompt user question
 
 =head1 VERSION
 
-This document describes version 0.72 of SHARYANTO::Text::Prompt (from Perl distribution SHARYANTO-Utils), released on 2014-05-08.
+This document describes version 0.73 of SHARYANTO::Text::Prompt (from Perl distribution SHARYANTO-Utils), released on 2014-05-10.
 
 =head1 FUNCTIONS
 

@@ -6,10 +6,10 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(process_tt_recursive);
 
 use File::Find;
-use File::Slurp;
+use File::Slurp::Tiny 'read_file', 'write_file';
 use Template::Tiny;
 
-our $VERSION = '0.72'; # VERSION
+our $VERSION = '0.73'; # VERSION
 
 # recursively find *.tt and process them. can optionally delete the *.tt files
 # after processing.
@@ -46,7 +46,7 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-This document describes version 0.72 of SHARYANTO::Template::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-08.
+This document describes version 0.73 of SHARYANTO::Template::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-10.
 
 =head1 FUNCTIONS
 

@@ -12,6 +12,7 @@ lib/SHARYANTO/ColorTheme/Util.pm
 lib/SHARYANTO/HTML/Extract/ImageLinks.pm
 lib/SHARYANTO/HTTP/DetectUA/Simple.pm
 lib/SHARYANTO/Hash/Util.pm
+lib/SHARYANTO/List/Util.pm
 lib/SHARYANTO/Locale/Util.pm
 lib/SHARYANTO/Log/Util.pm
 lib/SHARYANTO/Template/Util.pm
@@ -23,6 +24,7 @@ t/array_util.t
 t/colortheme_util.t
 t/detect_http_ua_simple.t
 t/hash_util.t
+t/list_util.t
 t/log_util.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t

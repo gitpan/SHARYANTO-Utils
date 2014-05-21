@@ -4,7 +4,7 @@ use warnings;
 
 # this test was generated with Dist::Zilla::Plugin::Test::Compile 2.039
 
-use Test::More  tests => 11 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 12 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
@@ -14,6 +14,7 @@ my @module_files = (
     'SHARYANTO/HTML/Extract/ImageLinks.pm',
     'SHARYANTO/HTTP/DetectUA/Simple.pm',
     'SHARYANTO/Hash/Util.pm',
+    'SHARYANTO/List/Util.pm',
     'SHARYANTO/Locale/Util.pm',
     'SHARYANTO/Log/Util.pm',
     'SHARYANTO/Template/Util.pm',

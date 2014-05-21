@@ -1,25 +1,36 @@
-package SHARYANTO::Hash::Util;
+package SHARYANTO::List::Util;
 
 use 5.010;
 use strict;
 use warnings;
-use Data::Clone;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(rename_key);
+our @EXPORT_OK = qw(
+                       uniq
+               );
 
 our $VERSION = '0.74'; # VERSION
+our $DATE = '2014-05-21'; # DATE
 
-sub rename_key {
-    my ($h, $okey, $nkey) = @_;
-    die unless    exists $h->{$okey};
-    die if        exists $h->{$nkey};
-    $h->{$nkey} = delete $h->{$okey};
+sub uniq {
+    my @res;
+
+    return () unless @_;
+    my $last = shift;
+    push @res, $last;
+    for (@_) {
+        next if !defined($_) && !defined($last);
+        # XXX $_ becomes stringified
+        next if defined($_) && defined($last) && $_ eq $last;
+        push @res, $_;
+        $last = $_;
+    }
+    @res;
 }
 
 1;
-# ABSTRACT: Hash utilities
+# ABSTRACT: List utilities
 
 __END__
 
@@ -29,28 +40,26 @@ __END__
 
 =head1 NAME
 
-SHARYANTO::Hash::Util - Hash utilities
+SHARYANTO::List::Util - List utilities
 
 =head1 VERSION
 
-This document describes version 0.74 of SHARYANTO::Hash::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-21.
+This document describes version 0.74 of SHARYANTO::List::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-21.
 
 =head1 SYNOPSIS
 
- use SHARYANTO::Hash::Util qw(rename_key);
- my %h = (a=>1, b=>2);
- rename_key(\%h, "a", "alpha"); # %h = (alpha=>1, b=>2)
+ use SHARYANTO::List::Util qw(uniq);
+
+ my @res = uniq(1, 4, 4, 3, 1, 1, 2); # 1, 4, 3, 1, 2
+
+=head1 DESCRIPTION
 
 =head1 FUNCTIONS
 
-=head2 rename_key(\%hash, $old_key, $new_key)
+=head2 uniq(@list) => LIST
 
-Rename key. This is basically C<< $hash{$new_key} = delete $hash{$old_key} >>
-with a couple of additional checks. It is a shortcut for:
-
- die unless exists $hash{$old_key};
- die if     exists $hash{$new_key};
- $hash{$new_key} = delete $hash{$old_key};
+Remove I<adjacent> duplicates from list, i.e. behave more like Unix utility's
+B<uniq> instead of L<List::MoreUtils>'s C<uniq> function.
 
 =head1 SEE ALSO
 

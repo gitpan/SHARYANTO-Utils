@@ -21,7 +21,7 @@ our %EXPORT_TAGS = (
     locale_h => ['setlocale', @posix_consts],
 );
 
-our $VERSION = '0.74'; # VERSION
+our $VERSION = '0.75'; # VERSION
 
 sub setlocale {
     my $cat = shift;
@@ -65,7 +65,7 @@ SHARYANTO::Locale::Util - Locale utilities
 
 =head1 VERSION
 
-This document describes version 0.74 of SHARYANTO::Locale::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-21.
+This document describes version 0.75 of SHARYANTO::Locale::Util (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
 
 =head1 SYNOPSIS
 

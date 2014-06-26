@@ -14,7 +14,7 @@ our @EXPORT_OK = qw(
                        split_array
                );
 
-our $VERSION = '0.74'; # VERSION
+our $VERSION = '0.75'; # VERSION
 
 our %SPEC;
 
@@ -132,7 +132,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-This document describes version 0.74 of SHARYANTO::Array::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-21.
+This document describes version 0.75 of SHARYANTO::Array::Util (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
 
 =head1 SYNOPSIS
 

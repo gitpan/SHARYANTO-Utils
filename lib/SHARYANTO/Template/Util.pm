@@ -9,7 +9,7 @@ use File::Find;
 use File::Slurp::Tiny 'read_file', 'write_file';
 use Template::Tiny;
 
-our $VERSION = '0.74'; # VERSION
+our $VERSION = '0.75'; # VERSION
 
 # recursively find *.tt and process them. can optionally delete the *.tt files
 # after processing.
@@ -46,7 +46,7 @@ SHARYANTO::Template::Util - Recursively process .tt files
 
 =head1 VERSION
 
-This document describes version 0.74 of SHARYANTO::Template::Util (from Perl distribution SHARYANTO-Utils), released on 2014-05-21.
+This document describes version 0.75 of SHARYANTO::Template::Util (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
 
 =head1 FUNCTIONS
 

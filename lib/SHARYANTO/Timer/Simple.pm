@@ -9,8 +9,8 @@ no warnings 'once';
 use Time::HiRes;
 use Time::Stopwatch;
 
-our $VERSION = '0.74'; # VERSION
-our $DATE = '2014-05-21'; # DATE
+our $VERSION = '0.75'; # VERSION
+our $DATE = '2014-06-26'; # DATE
 
 tie our($TIMER), 'Time::Stopwatch';
 
@@ -46,7 +46,7 @@ SHARYANTO::Timer::Simple - Simple timer
 
 =head1 VERSION
 
-This document describes version 0.74 of SHARYANTO::Timer::Simple (from Perl distribution SHARYANTO-Utils), released on 2014-05-21.
+This document describes version 0.75 of SHARYANTO::Timer::Simple (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
 
 =head1 SYNOPSIS
 

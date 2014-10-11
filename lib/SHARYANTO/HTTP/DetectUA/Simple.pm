@@ -5,7 +5,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(detect_http_ua_simple);
 
-our $VERSION = '0.75'; # VERSION
+our $VERSION = '0.76'; # VERSION
 
 our %SPEC;
 
@@ -121,19 +121,19 @@ SHARYANTO::HTTP::DetectUA::Simple - A very simple and generic browser detection 
 
 =head1 VERSION
 
-This document describes version 0.75 of SHARYANTO::HTTP::DetectUA::Simple (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
+This document describes version 0.76 of SHARYANTO::HTTP::DetectUA::Simple (from Perl distribution SHARYANTO-Utils), released on 2014-10-11.
 
 =head1 DESCRIPTION
 
 
 I needed a simple and fast routine which can detect whether HTTP client is a GUI
 browser (like Chrome or Firefox), a text browser (like Lynx or Links), or
-neither (like curl, or L). Hence, this module.
+neither (like curl, or L<LWP>). Hence, this module.
 
 =head1 FUNCTIONS
 
 
-=head2 detect_http_ua_simple(@args) -> [status, msg, result, meta]
+=head2 detect_http_ua_simple($env) -> [status, msg, result, meta]
 
 Detect whether HTTP client is a GUI/TUI browser.
 
@@ -145,15 +145,9 @@ Currently these heuristic rules are used:
 
 =over
 
-=item *
+=item * check popular browser markers in User-Agent header (e.g. 'Chrome', 'Opera');
 
-check popular browser markers in User-Agent header (e.g. 'Chrome', 'Opera');
-
-
-=item *
-
-check Accept header for 'image/';
-
+=item * check Accept header for 'image/';
 
 =back
 
@@ -181,6 +175,20 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
+ (hash)
+
+=over
+
+=item * 'is_gui_browser' key will be set to true if HTTP client is a GUI browser.
+
+=item * 'is_text_browser' key will be set to true if HTTP client is a text/TUI
+browser.
+
+=item * 'is_browser' key will be set to true if either 'is_gui_browser' or
+'is_text_browser' is set to true.
+
+=back
+
 =head1 SEE ALSO
 
 L<SHARYANTO>
@@ -203,11 +211,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -8,7 +8,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(@log_levels $log_levels_re);
 
-our $VERSION = '0.75'; # VERSION
+our $VERSION = '0.76'; # VERSION
 
 our @log_levels = (qw/trace debug info warn error fatal/);
 our $log_levels_re = join("|", @log_levels);
@@ -29,7 +29,7 @@ SHARYANTO::Log::Util - Log-related utilities
 
 =head1 VERSION
 
-This document describes version 0.75 of SHARYANTO::Log::Util (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
+This document describes version 0.76 of SHARYANTO::Log::Util (from Perl distribution SHARYANTO-Utils), released on 2014-10-11.
 
 =head1 SYNOPSIS
 
@@ -77,11 +77,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -4,7 +4,8 @@ use 5.010;
 use strict;
 use warnings;
 use experimental 'smartmatch';
-use Data::Clone;
+
+use Perinci::Sub::Util qw(gen_modified_sub);
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -14,7 +15,8 @@ our @EXPORT_OK = qw(
                        split_array
                );
 
-our $VERSION = '0.75'; # VERSION
+our $DATE = '2014-10-11'; # DATE
+our $VERSION = '0.76'; # VERSION
 
 our %SPEC;
 
@@ -78,9 +80,11 @@ sub match_array_or_regex {
     }
 }
 
-*match_regex_or_array = \&match_array_or_regex;
-$SPEC{match_regex_or_array} = clone $SPEC{match_array_or_regex};
-$SPEC{match_regex_or_array}{summary} = 'Alias for match_array_or_regex';
+gen_modified_sub(
+    output_name => 'match_regex_or_array',
+    base_name   => 'match_array_or_regex',
+    summary     => 'Alias for match_array_or_regex',
+);
 
 sub split_array {
     no strict 'refs';
@@ -132,7 +136,7 @@ SHARYANTO::Array::Util - Array-related utilities
 
 =head1 VERSION
 
-This document describes version 0.75 of SHARYANTO::Array::Util (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
+This document describes version 0.76 of SHARYANTO::Array::Util (from Perl distribution SHARYANTO-Utils), released on 2014-10-11.
 
 =head1 SYNOPSIS
 
@@ -164,26 +168,26 @@ Like the C<split()> builtin Perl function, but applies on an array instead of a
 scalar. It loosely follows the C<split()> semantic, with some exceptions.
 
 
-=head2 match_array_or_regex(@args) -> any
+=head2 match_array_or_regex($needle, $haystack) -> any
 
 Check whether an item matches (list of) values/regexes.
 
 Examples:
 
- match_array_or_regex( haystack => ["abc", "abd"], needle => "abc"); # -> 1
- match_array_or_regex( haystack => qr/ab./, needle => "abc"); # -> 1
- match_array_or_regex( haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
+ match_array_or_regex("abc", ["abc", "abd"]); # -> 1
+ match_array_or_regex("abc", qr/ab./); # -> 1
+ match_array_or_regex("abc", [qr/ab./, "abd"]); # -> 1
 This routine can be used to match an item against a regex or a list of
 strings/regexes, e.g. when matching against an ACL.
 
 Since the smartmatch (C<~~>) operator can already match against a list of strings
 or regexes, this function is currently basically equivalent to:
 
-    if (reg($haystack) eq 'ARRAY') {
-        return $needle ~~ @$haystack;
-    } else {
-        return $needle =~ /$haystack/;
-    }
+ if (reg($haystack) eq 'ARRAY') {
+     return $needle ~~ @$haystack;
+ } else {
+     return $needle =~ /$haystack/;
+ }
 
 Arguments ('*' denotes required arguments):
 
@@ -197,27 +201,29 @@ Arguments ('*' denotes required arguments):
 
 Return value:
 
+ (any)
 
-=head2 match_regex_or_array(@args) -> any
+
+=head2 match_regex_or_array($needle, $haystack) -> any
 
 Alias for match_array_or_regex.
 
 Examples:
 
- match_regex_or_array( haystack => ["abc", "abd"], needle => "abc"); # -> 1
- match_regex_or_array( haystack => qr/ab./, needle => "abc"); # -> 1
- match_regex_or_array( haystack => [qr/ab./, "abd"], needle => "abc"); # -> 1
+ match_regex_or_array("abc", ["abc", "abd"]); # -> 1
+ match_regex_or_array("abc", qr/ab./); # -> 1
+ match_regex_or_array("abc", [qr/ab./, "abd"]); # -> 1
 This routine can be used to match an item against a regex or a list of
 strings/regexes, e.g. when matching against an ACL.
 
 Since the smartmatch (C<~~>) operator can already match against a list of strings
 or regexes, this function is currently basically equivalent to:
 
-    if (reg($haystack) eq 'ARRAY') {
-        return $needle ~~ @$haystack;
-    } else {
-        return $needle =~ /$haystack/;
-    }
+ if (reg($haystack) eq 'ARRAY') {
+     return $needle ~~ @$haystack;
+ } else {
+     return $needle =~ /$haystack/;
+ }
 
 Arguments ('*' denotes required arguments):
 
@@ -230,6 +236,8 @@ Arguments ('*' denotes required arguments):
 =back
 
 Return value:
+
+ (any)
 
 =head1 TODO
 
@@ -263,11 +271,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

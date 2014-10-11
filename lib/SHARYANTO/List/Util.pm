@@ -14,8 +14,8 @@ our @EXPORT_OK = qw(
                        find_missing_strs_in_seq
                );
 
-our $VERSION = '0.75'; # VERSION
-our $DATE = '2014-06-26'; # DATE
+our $VERSION = '0.76'; # VERSION
+our $DATE = '2014-10-11'; # DATE
 
 sub uniq_adj {
     my @res;
@@ -102,7 +102,7 @@ SHARYANTO::List::Util - List utilities
 
 =head1 VERSION
 
-This document describes version 0.75 of SHARYANTO::List::Util (from Perl distribution SHARYANTO-Utils), released on 2014-06-26.
+This document describes version 0.76 of SHARYANTO::List::Util (from Perl distribution SHARYANTO-Utils), released on 2014-10-11.
 
 =head1 FUNCTIONS
 
@@ -158,11 +158,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
